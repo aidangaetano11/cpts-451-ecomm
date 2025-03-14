@@ -1,6 +1,7 @@
 package cpts451.ecomm.controllers;
 
 import cpts451.ecomm.entities.Admin;
+import cpts451.ecomm.exceptions.ExistingAttributeException;
 import cpts451.ecomm.exceptions.MissingFieldException;
 import cpts451.ecomm.services.CreateAdminAccountService;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class CreateAdminAccountController {
             admin.setRole("ADMIN");
             createAdminAccountService.CreateNewAccount(admin);
             return "redirect:/";
-        } catch (MissingFieldException e) {
+        } catch (MissingFieldException | ExistingAttributeException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "createAdmin";
         }

@@ -1,6 +1,7 @@
 package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
+import org.checkerframework.checker.units.qual.C;
 
 @Entity
 @Table(name = "user_account")  // Changes table name to user_account instead of User (mainly because it is a default name so will cause conflicts)
@@ -10,16 +11,22 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // User id will be incremented everytime a user is created
     private Integer userId;
 
+    @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String role;
 
     public User(String firstName, String lastName, String email, String phoneNumber,
