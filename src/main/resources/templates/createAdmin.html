@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create Admin Account</h1>
+
+<div id="flash" th:if="${errorMessage}" style="color: red">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form action="" th:action="@{/createAdmin}" method="post">
+    <p>First Name: <input th:field="${admin.firstName}" type="text" name="firstName" /></p>
+    <p>Last Name: <input th:field="${admin.lastName}" type="text" name="lastName" /></p>
+    <br />
+    <p>Email: <input th:field="${admin.email}" type="text" name="email" /></p>
+    <p>Phone Number: <input th:field="${admin.phoneNumber}" type="text" name="phoneNumber" /></p>
+    <p>Password: <input th:field="${admin.password}" type="password" name="password" /></p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+<p>
+    <a href="/">Click here to return to the home page</a>
+</p>
+</body>
+</html>
