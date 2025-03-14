@@ -1,4 +1,4 @@
-﻿package cpts451.ecomm.services;
+package cpts451.ecomm.services;
 
 import cpts451.ecomm.entities.User;
 import cpts451.ecomm.repositories.UserRepository;
@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService
     @Override
     public boolean verifyLogin(String email, String password) {
         User account = this.find(email);
-        
+
         if (account == null){
             return false;
         }
@@ -32,5 +32,12 @@ public class LoginServiceImpl implements LoginService
 
             return false;
         }
+    }
+
+    @Override
+    public String getUserRole(String email)
+    {
+        User account = this.find(email);
+        return (account != null) ? account.getRole() : null;
     }
 }

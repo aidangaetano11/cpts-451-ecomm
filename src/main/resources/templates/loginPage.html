@@ -1,17 +1,25 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Login</title>
+    <title>Login Page</title>
 </head>
 <body>
 <h1>Login</h1>
 
-<a href="createCustomerAccount">Create Customer Account</a>
-<a href="createAdminAccount">Create Admin Account</a>
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+<form th:action="@{/login}" method="post">
+    <p>Email: <input type="text" th:field="*{loginInfo.email}" /></p>
+    <p>Password: <input type="password" th:field="*{loginInfo.password}" /></p>
+    <p><input type="submit" value="Login" /></p>
+</form>
 
 <p>
-    <a href="/">Click here to return to the home page</a>
+    <a href="/createCustomerAccount">Create Customer Account</a>
+    <a href="/createAdminAccount">Create Admin Account</a>
 </p>
 </body>
 </html>
