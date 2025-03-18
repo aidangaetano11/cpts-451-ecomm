@@ -25,7 +25,6 @@ public class Cart{
     //@Column(nullable = false)
     //private Order cartOrder;
 
-
     public Cart(List<Product> productLists) {
         productList = productLists;
     }
