@@ -1,5 +1,5 @@
 # Sprint 1 Report 
-Video Link: 
+Video Link: https://www.youtube.com/watch?v=GUwCdMUIAio
 ## What's New (User Facing)
  * Created User, Admin, Customer Entity
  * Created Create Account Controller and Service
@@ -9,13 +9,11 @@ Video Link:
  * Created Tables for Other Entities
 
 ## Work Summary (Developer Facing)
-Provide a one paragraph synposis of what your team accomplished this sprint. Don't repeat the "What's New" list of features. Instead, help the instructor understand how you went about the work described there, any barriers you overcame, and any significant learnings for your team.
-
 The foundation of our project has been laid out. We have implemented H2 database to our project. Repositories for User, Customer and Admin have been set up which allows us to test out our current H2 database. Our repositories are based off of our User, Customer and Admin entities. Customer and Admin are inherited off of our User as they will use a lot of the same variables. We have also set up the ability to create an Admin and Customer account as well as the ability to login. Currently, they are not separate so if a login is successful, it will bring you back to the home page.
 On top of this, we have initialized the entity tables in our database, which includes Payment, Products, and the like.
 
 ## Unfinished Work
-If applicable, explain the work you did not finish in this sprint. For issues/user stories in the current sprint that have not been closed, (a) any progress toward completion of the issues has been clearly tracked (by checking the checkboxes of  acceptance criteria), (b) a comment has been added to the issue to explain why the issue could not be completed (e.g., "we ran out of time" or "we did not anticipate it would be so much work"), and (c) the issue is added to a subsequent sprint, so that it can be addressed later.
+We manages to finish all isues we started this sprint.
 
 ## Completed Issues/User Stories
 Here are links to the issues that we completed in this sprint:
@@ -29,28 +27,9 @@ Here are links to the issues that we completed in this sprint:
  * https://github.com/aidangaetano11/cpts-451-ecomm/issues/5
  * https://github.com/aidangaetano11/cpts-451-ecomm/issues/4
  * https://github.com/aidangaetano11/cpts-451-ecomm/issues/2
- * 
-
- Desirables (Remove this section when you save the file):
-  * Each issue should be assigned to a milestone
-  * Each completed issue should be assigned to a pull request
-  * Each completed pull request should include a link to a "Before and After" video
-  * All team members who contributed to the issue should be assigned to it on GitHub
-  * Each issue should be assigned story points using a label
-  * Story points contribution of each team member should be indicated in a comment
- 
+   
  ## Incomplete Issues/User Stories
- Here are links to issues we worked on but did not complete in this sprint:
- 
- * URL of issue 1 <<One sentence explanation of why issue was not completed>>
- * URL of issue 2 <<One sentence explanation of why issue was not completed>>
- * URL of issue n <<One sentence explanation of why issue was not completed>>
- 
- Examples of explanations (Remove this section when you save the file):
-  * "We ran into a complication we did not anticipate (explain briefly)." 
-  * "We decided that the feature did not add sufficient value for us to work on it in this sprint (explain briefly)."
-  * "We could not reproduce the bug" (explain briefly).
-  * "We did not get to this issue because..." (explain briefly)
+We managed to finish all issues we started this sprint.
 
 ## Code Files for Review
 Please review the following code files, which were actively developed during this sprint, for quality:
@@ -78,6 +57,12 @@ Please review the following code files, which were actively developed during thi
  * [OrderBy.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/OrderBy.java)
  * [Payment.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/Payment.java)
  * [Product.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/Product.java)
+ * [Cart.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/Cart.java)
+ * [Wishlist.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/Wishlist.java)
+ * [Review.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/Review.java)
+ * [ReviewProduct.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/ReviewProduct.java)
+ * [ReviewVendor.java](https://github.com/aidangaetano11/cpts-451-ecomm/blob/main/src/main/java/cpts451/ecomm/entities/ReviewVendor.java)
+
 
 
 ## Retrospective Summary
