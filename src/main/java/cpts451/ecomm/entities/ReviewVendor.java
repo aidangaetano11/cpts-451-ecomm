@@ -4,11 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-@Data
-@EqualsAndHashCode(callSuper = true)
 @Entity
 public class ReviewVendor extends Review {
 
@@ -19,5 +14,10 @@ public class ReviewVendor extends Review {
     public ReviewVendor (Customer cust, Integer rate, String com, String dat, Admin vend) {
         super(cust, rate, com, dat);
         this.vendor = vend;
+    }
+
+    public Admin getVendor() {return vendor;}
+    public void setVendor(Admin ven) {
+        this.vendor = ven;
     }
 }

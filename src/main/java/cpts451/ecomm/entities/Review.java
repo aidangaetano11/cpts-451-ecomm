@@ -1,11 +1,6 @@
 package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor  // Essentially creates getters and setters for everything
 @Entity
 @Table  // Changes table name to user_account instead of User (mainly because it is a default name so will cause conflicts)
 @Inheritance(strategy= InheritanceType.JOINED)
@@ -33,4 +28,22 @@ public abstract class Review {
         this.comment = com;
         this.date = dat;
     }
+
+    public Integer getreviewId() {
+        return reviewId;
+    }
+
+    public Customer getCustomer() {return customer;}
+    public void setCustomer(Customer cust) {
+        this.customer = cust;
+    }
+
+    public Integer getRating() {return rating;}
+    public void setRating(Integer rat) { this.rating = rat; }
+
+    public String getComment() {return comment;}
+    public void setComment(String com) { this.comment = com; }
+
+    public String getDate() {return date;}
+    public void setDate(String dat) { this.date = dat; }
 }
