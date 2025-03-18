@@ -18,15 +18,23 @@ We manages to finish all isues we started this sprint.
 ## Completed Issues/User Stories
 Here are links to the issues that we completed in this sprint:
 
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/1
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/8
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/10
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/9
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/11
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/16
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/5
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/4
- * https://github.com/aidangaetano11/cpts-451-ecomm/issues/2
+Aiden Gaetano
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/1 Create User, Admin, Customer Entities
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/8 Create Create Account Controller and Service
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/10 Customer and Admin Create Account Implementation
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/9 Create Login Controller and Service
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/11 Implemented Account Login
+
+Albert Li
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/16 Create Category Entity
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/5 Create Order Entity
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/4 Create Payment Entity
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/2 Create Product Entity
+
+Jim Kino
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/7 Create Wishlist Entity
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/6 Create Review Entity
+ * https://github.com/aidangaetano11/cpts-451-ecomm/issues/3 Create Cart Entity
    
  ## Incomplete Issues/User Stories
 We managed to finish all issues we started this sprint.
