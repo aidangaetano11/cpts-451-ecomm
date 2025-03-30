@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements LoginService
 {
-    private final UserRepository userRepository;
+    UserRepository userRepository;
 
     public LoginServiceImpl(UserRepository userRepository)
     {
