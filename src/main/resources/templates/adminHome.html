@@ -2,11 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CptS 451</title>
 </head>
 <body>
-<h1> Welcome, Admin! </h1>
+<h1 th:text="'Welcome ' + ${adminFirstName} + ' ' + ${adminLastName} + '!'"></h1>
+
+<h2>Account Details </h2>
+<h3 th:text="'Email: ' + ${adminEmail}"></h3>
+<h3 th:text="'Phone Number: ' + ${adminPhoneNumber}"></h3>
+
+<h3>List of Admins:</h3>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> ID </th>
+        <th> Email </th>
+        <th> Phone Number </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="admin: ${admins}">
+        <td th:text="${admin.getFirstName()} + ' ' + ${admin.getLastName()}"></td>
+        <td th:text="${admin.getId()}"></td>
+        <td th:text="${admin.getEmail()}"></td>
+        <td th:text="${admin.getPhoneNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<h3>List of Customers:</h3>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> ID </th>
+        <th> Email </th>
+        <th> Phone Number </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer: ${customers}">
+        <td th:text="${customer.getFirstName()} + ' ' + ${customer.getLastName()}"></td>
+        <td th:text="${customer.getId()}"></td>
+        <td th:text="${customer.getEmail()}"></td>
+        <td th:text="${customer.getPhoneNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
 
 <p>
     <a href="/">Click here to logout and return to the home page</a>
