@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CptS 451</title>
 </head>
 <body>
-<h1> Welcome, Customer! </h1>
+<h1 th:text="'Welcome ' + ${customerFirstName} + ' ' + ${customerLastName} + '!'"></h1>
+
+<h2>Account Details </h2>
+<h3 th:text="'Email: ' + ${customerEmail}"></h3>
+<h3 th:text="'Phone Number: ' + ${customerPhoneNumber}"></h3>
 
 <p>
     <a href="/">Click here to logout and return to the home page</a>

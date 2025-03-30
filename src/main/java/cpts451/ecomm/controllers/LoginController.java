@@ -1,6 +1,8 @@
 package cpts451.ecomm.controllers;
 
+import cpts451.ecomm.entities.Customer;
 import cpts451.ecomm.entities.User;
+import cpts451.ecomm.services.CustomerService;
 import cpts451.ecomm.services.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +33,12 @@ public class LoginController {
         public void setPassword(String password) { this.password = password; }
     }
 
-    private final LoginService loginService;
+    LoginService loginService;
+    CustomerService customerService;
 
-    @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, CustomerService customerService) {
         this.loginService = loginService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/loginPage")
@@ -45,8 +48,9 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("loginInfo") LoginAttributes loginInfo, HttpSession session, Model model)
+    public String login(@ModelAttribute LoginAttributes loginInfo, HttpSession session, Model model)
     {
+        String redirect = "loginPage";
         String email = loginInfo.getEmail();
         String password = loginInfo.getPassword();
 
@@ -54,25 +58,15 @@ public class LoginController {
 
         if (loginSuccess) {
             User account = loginService.find(email);
+            Customer customer = customerService.find(account.getId());
             String role = loginService.getUserRole(email);
 
-            // Store user details in the session
-            session.setAttribute("user", account);
-
-            // Redirect based on role (Currently, it will be a successful login if we are sent back to index. We don't have user controllers or services yet.)
-            if ("ADMIN".equals(role)) {
-                return "redirect:/";
-            } else if ("CUSTOMER".equals(role)) {
-                return "redirect:/";
-            } else {
-                // Handle unknown roles
-                model.addAttribute("error", "Unknown user role.");
-                return "loginPage";
+            if (customer != null && "CUSTOMER".equals(role)) {
+                session.setAttribute("customer", customer);
+                redirect = "redirect:/customerHome";
             }
-        } else {
-            // Handle invalid credentials
-            model.addAttribute("error", "Invalid email or password.");
-            return "loginPage";
         }
+
+        return redirect;
     }
 }
