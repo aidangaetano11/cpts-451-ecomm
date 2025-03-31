@@ -24,15 +24,9 @@ public class LoginServiceImpl implements LoginService
         if (account == null){
             return false;
         }
-        else
-        {
-            if (account.getPassword().equals(password)){
-                return true;
-            }
-
-            return false;
-        }
+        return account.verifyPassword(password);
     }
+
 
     @Override
     public String getUserRole(String email)

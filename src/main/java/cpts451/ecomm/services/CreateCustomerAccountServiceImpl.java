@@ -50,10 +50,6 @@ public class CreateCustomerAccountServiceImpl implements CreateCustomerAccountSe
             throw new MissingFieldException("phone number is required.");
         }
 
-        if (newCustomer.getPassword() == null || newCustomer.getPassword().trim().isEmpty())
-        {
-            throw new MissingFieldException("password is required.");
-        }
     }
 
     private void ValidateExistingFields(Customer newCustomer)

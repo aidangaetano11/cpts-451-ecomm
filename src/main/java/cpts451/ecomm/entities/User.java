@@ -1,6 +1,11 @@
 package cpts451.ecomm.entities;
 
+import cpts451.ecomm.hashing.PasswordHasher;
 import jakarta.persistence.*;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "user_account")  // Changes table name to user_account instead of User (mainly because it is a default name so will cause conflicts)
@@ -23,19 +28,26 @@ public abstract class User {
     private String phoneNumber;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
     private String role;
 
+    @Transient
+    private String password;
+
+    // password salt
+    private byte[] salt;
+
+    // password hash
+    private byte[] hash;
+
+
     public User(String firstName, String lastName, String email, String phoneNumber,
-                String password, String role) {
+                String role, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
         this.role = role;
+        this.setPassword(password);
     }
 
     public User() {
@@ -66,17 +78,29 @@ public abstract class User {
 
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { this.password = password; }
-
     public String getRole() { return role; }
 
     public void setRole(String role) { this.role = role; }
 
-    public Integer getId() {
-        return userId;
+    public String getPassword() { return ""; }
+
+    public void setPassword(String newPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        this.salt = PasswordHasher.generateSalt();
+        this.hash = PasswordHasher.generateHashCode(newPassword, this.salt);
     }
 
-    public void setID(int id) { this.userId = id; }
+    public Integer getId() { return userId; }
+
+    public byte[] getSalt() { return this.salt; }
+
+    public byte[] getHash() { return this.hash; }
+
+    public boolean verifyPassword(String inputPassword) {
+        try {
+            byte[] inputHash = PasswordHasher.generateHashCode(inputPassword, this.salt);
+            return Arrays.equals(inputHash, this.hash);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            return false;
+        }
+    }
 }
