@@ -60,6 +60,13 @@ public class LoginController {
 
         boolean loginSuccess = loginService.verifyLogin(email, password);
 
+        if (!loginSuccess)
+        {
+            model.addAttribute("error", "Invalid email or password");
+            model.addAttribute("loginInfo", loginInfo);
+            redirect = "loginPage";
+        }
+
         if (loginSuccess) {
             User account = loginService.find(email);
             Customer customer = customerService.find(account.getId());
