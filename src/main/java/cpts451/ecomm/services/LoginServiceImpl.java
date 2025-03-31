@@ -19,20 +19,16 @@ public class LoginServiceImpl implements LoginService
 
     @Override
     public boolean verifyLogin(String email, String password) {
+
         User account = this.find(email);
 
         if (account == null){
             return false;
         }
-        else
-        {
-            if (account.getPassword().equals(password)){
-                return true;
-            }
 
-            return false;
-        }
+        return account.verifyPassword(password);
     }
+
 
     @Override
     public String getUserRole(String email)

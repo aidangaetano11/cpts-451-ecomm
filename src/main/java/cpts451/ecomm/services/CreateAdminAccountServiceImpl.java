@@ -50,11 +50,6 @@ public class CreateAdminAccountServiceImpl implements CreateAdminAccountService 
         {
             throw new MissingFieldException("phone number is required.");
         }
-
-        if (newAdmin.getPassword() == null || newAdmin.getPassword().trim().isEmpty())
-        {
-            throw new MissingFieldException("password is required.");
-        }
     }
 
     private void ValidateExistingFields(Admin newAdmin)

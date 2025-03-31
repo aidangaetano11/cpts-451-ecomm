@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    <style>
+        .error-message {
+            color: red;
+            background-color: #ffeeee;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid red;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 <h1>Login</h1>
 
-<div th:if="${error}" style="color: red;">
-    <p th:text="${error}"></p>
+<div th:if="${error}" class="error-message">
+    <span th:text="${error}"></span>
 </div>
 
 <form th:action="@{/login}" method="post">
