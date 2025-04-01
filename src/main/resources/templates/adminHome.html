@@ -11,6 +11,31 @@
 <h3 th:text="'Email: ' + ${adminEmail}"></h3>
 <h3 th:text="'Phone Number: ' + ${adminPhoneNumber}"></h3>
 
+<a href="/createProductPage">Create New Product</a>
+
+<h3>List of Products:</h3>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> ID </th>
+        <th> Description </th>
+        <th> Price </th>
+        <th> Quantity </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.getProductName()}"></td>
+        <td th:text="${product.getProductID()}"></td>
+        <td th:text="${product.getProductDescription()}"></td>
+        <td th:text="'$' + ${product.getProductPrice()}"></td>
+        <td th:text="${product.getProductQuantity()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
 <h3>List of Admins:</h3>
 <table style="border: solid">
     <thead>
