@@ -31,7 +31,7 @@ public class CreateCustomerAccountController
         try {
             customer.setRole("CUSTOMER");
             createCustomerAccountService.CreateNewAccount(customer);
-            return "redirect:/";
+            return "redirect:/loginPage";
         } catch (MissingFieldException | ExistingAttributeException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "createCustomer";

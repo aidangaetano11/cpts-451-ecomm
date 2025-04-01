@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>CptS 451</title>
+    <style>
+        .store-page-link {
+            padding: 5px 10px;
+            background: #2dcbbf;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 <h1 th:text="'Welcome ' + ${adminFirstName} + ' ' + ${adminLastName} + '!'"></h1>
@@ -79,7 +88,7 @@
 <br>
 
 <p>
-    <a href="/">Click here to logout and return to the home page</a>
+    <a href="/storePage" class="store-page-link">Back to Store Page</a>
 </p>
 
 </body>

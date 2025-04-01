@@ -74,11 +74,11 @@ public class LoginController {
 
             if (customer != null && "CUSTOMER".equals(role)) {
                 session.setAttribute("customer", customer);
-                redirect = "redirect:/customerHome";
+                redirect = "redirect:/storePage";
             }
             else if (admin != null && "ADMIN".equals(role)) {
                 session.setAttribute("admin", admin);
-                redirect = "redirect:/adminHome";
+                redirect = "redirect:/storePage";
             }
         }
 

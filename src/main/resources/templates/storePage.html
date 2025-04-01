@@ -45,6 +45,13 @@
             text-decoration: none;
             border-radius: 4px;
         }
+        .account-link {
+            padding: 5px 10px;
+            background: #2dcbbf;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
         .logout-link {
             padding: 5px 10px;
             background: #f44336;
@@ -60,10 +67,16 @@
 
     <div class="user-info">
         <!-- Show user greeting if logged in -->
-        <span th:if="${session.customer != null}"
-              th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
-        <span th:if="${session.admin != null}"
-              th:text="'Hello, Admin ' + ${session.admin.getFirstName()}"></span>
+        <span th:if="${session.customer != null}">
+            <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
+            <a href="/customerHome" class="account-link">Account</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+        <span th:if="${session.admin != null}">
+            <span th:text="'Hello, Admin ' + ${session.admin.getFirstName()}"></span>
+            <a href="/adminHome" class="account-link">Account</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
 
         <!-- Show login link if not logged in -->
         <a th:unless="${session.customer != null or session.admin != null}"
