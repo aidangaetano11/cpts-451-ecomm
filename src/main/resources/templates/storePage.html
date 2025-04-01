@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CptS 451</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .login-link {
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .logout-link {
+            padding: 5px 10px;
+            background: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Welcome to Ecomm 451 Store Page</h1>
+
+    <div class="user-info">
+        <!-- Show user greeting if logged in -->
+        <span th:if="${session.customer != null}"
+              th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
+        <span th:if="${session.admin != null}"
+              th:text="'Hello, Admin ' + ${session.admin.getFirstName()}"></span>
+
+        <!-- Show login link if not logged in -->
+        <a th:unless="${session.customer != null or session.admin != null}"
+           href="/loginPage" class="login-link">Login</a>
+    </div>
+</div>
+
+<h3>List of Products:</h3>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> Description </th>
+        <th> Price </th>
+        <th> Quantity </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.getProductName()}"></td>
+        <td th:text="${product.getProductDescription()}"></td>
+        <td th:text="'$' + ${product.getProductPrice()}"></td>
+        <td th:text="${product.getProductQuantity()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+</body>
+</html>
