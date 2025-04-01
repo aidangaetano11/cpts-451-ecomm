@@ -30,7 +30,7 @@ public class CreateProductController {
     public String createProduct(@ModelAttribute Product product, Model model) {
         try {
             createProductService.CreateNewProduct(product);
-            return "redirect:/";
+            return "redirect:/adminHome";
         } catch (MissingFieldException e) {
             model.addAttribute("error", e.getMessage());
             return "createProduct";
