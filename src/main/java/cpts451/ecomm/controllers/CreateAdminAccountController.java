@@ -30,7 +30,7 @@ public class CreateAdminAccountController {
         try {
             admin.setRole("ADMIN");
             createAdminAccountService.CreateNewAccount(admin);
-            return "redirect:/";
+            return "redirect:/loginPage";
         } catch (MissingFieldException | ExistingAttributeException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "createAdmin";

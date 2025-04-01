@@ -7,7 +7,6 @@ import cpts451.ecomm.services.AdminService;
 import cpts451.ecomm.services.CustomerService;
 import cpts451.ecomm.services.LoginService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,11 +74,11 @@ public class LoginController {
 
             if (customer != null && "CUSTOMER".equals(role)) {
                 session.setAttribute("customer", customer);
-                redirect = "redirect:/customerHome";
+                redirect = "redirect:/storePage";
             }
             else if (admin != null && "ADMIN".equals(role)) {
                 session.setAttribute("admin", admin);
-                redirect = "redirect:/adminHome";
+                redirect = "redirect:/storePage";
             }
         }
 
