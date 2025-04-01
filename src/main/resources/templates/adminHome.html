@@ -11,6 +11,13 @@
             text-decoration: none;
             border-radius: 4px;
         }
+        .create-product-link {
+            padding: 5px 10px;
+            background: #009e04;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +27,7 @@
 <h3 th:text="'Email: ' + ${adminEmail}"></h3>
 <h3 th:text="'Phone Number: ' + ${adminPhoneNumber}"></h3>
 
-<a href="/createProductPage">Create New Product</a>
+<a href="/createProductPage" class="create-product-link">Create New Product</a>
 
 <h3>List of Products:</h3>
 <table style="border: solid">
