@@ -6,6 +6,8 @@ import cpts451.ecomm.entities.User;
 import cpts451.ecomm.services.AdminService;
 import cpts451.ecomm.services.CustomerService;
 import cpts451.ecomm.services.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,13 @@ public class LoginController {
     public String loginPage(Model model) {
         model.addAttribute("loginInfo", new LoginAttributes());
         return "loginPage";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request) {
+        session.invalidate();
+
+        return "redirect:/loginPage?logout";
     }
 
     @PostMapping("/login")
