@@ -14,16 +14,14 @@ public class Customer extends User {
 
     @ManyToMany
     @JoinTable(name = "cart", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "productID"))
-    private List<Product> cart;
+    private List<Product> cart = new ArrayList<>();
 
 
     public Customer(String firstName, String lastName, String email, String phoneNumber, String password, String shippingAddress) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
         this.shippingAddress = shippingAddress;
-        cart = new ArrayList<>();
     }
 
     public Customer() {
-        cart = new ArrayList<>();
     }
 }

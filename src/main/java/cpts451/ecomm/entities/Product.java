@@ -12,8 +12,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // Product id will be incremented everytime a user is created
     private Integer productID;
 
-    @ManyToMany(mappedBy = "cart")
-    private List<Product> productsInCart;
+    @ManyToMany(mappedBy = "cart", targetEntity = Customer.class)
+    private List<Product> productsInCart = new ArrayList<>();
 
     @Column(nullable = false)
     private String productName;
@@ -32,11 +32,9 @@ public class Product {
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
-        productsInCart = new ArrayList<>();
     }
 
     public Product() {
-        productsInCart = new ArrayList<>();
     }
 
     public Integer getProductID() {
