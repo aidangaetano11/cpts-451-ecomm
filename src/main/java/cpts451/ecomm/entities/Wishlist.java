@@ -5,18 +5,18 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"userID", "productID"}))
 @Entity
-@Table
 public class Wishlist{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer wishlistID;
 
-    @Column(nullable = false)
-    @ManyToMany
-    private List<Product> productList = new ArrayList<>();
-    //@Column(nullable = false)
-    //private Customer cartCustomer;
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private Integer userID;
+
+    private Integer productID;
 
     public Wishlist(List<Product> productLists) {
         productList = productLists;

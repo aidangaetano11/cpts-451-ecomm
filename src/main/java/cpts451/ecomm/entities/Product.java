@@ -2,12 +2,18 @@ package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // Product id will be incremented everytime a user is created
     private Integer productID;
+
+    @ManyToMany(mappedBy = "cart")
+    private List<Product> productsInCart;
 
     @Column(nullable = false)
     private String productName;
@@ -26,10 +32,11 @@ public class Product {
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        productsInCart = new ArrayList<>();
     }
 
     public Product() {
-
+        productsInCart = new ArrayList<>();
     }
 
     public Integer getProductID() {
