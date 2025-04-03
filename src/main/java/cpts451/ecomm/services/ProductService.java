@@ -8,4 +8,6 @@ public interface ProductService {
     Iterable<Product> findAll();
 
     Product save(Product product);
+
+    void deleteById(Integer productID);
 }
