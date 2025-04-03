@@ -77,6 +77,7 @@
         <span th:if="${session.customer != null}">
             <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
             <a href="/customerHome" class="account-link">Account</a>
+            <a href="/cart" class="cart-link">Cart</a>
             <a href="/logout" class="logout-link">Logout</a>
         </span>
         <span th:if="${session.admin != null}">
