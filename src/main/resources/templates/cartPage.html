@@ -52,13 +52,6 @@
             text-decoration: none;
             border-radius: 4px;
         }
-        .cart-link {
-            padding: 5px 10px;
-            background: #dabb26;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
         .logout-link {
             padding: 5px 10px;
             background: #f44336;
@@ -103,26 +96,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product: ${products}">
-        <td th:text="${product.getProductName()}"></td>
-        <td th:text="${product.getProductDescription()}"></td>
-        <td th:text="'$' + ${product.getProductPrice()}"></td>
-        <td th:text="${product.getProductQuantity()}"></td>
-        <td>
-            <div th:if="${session.customer != null}">
-                <form th:action="@{/addToCart}" method="post">
-                    <input type="hidden" name="productId" th:value="${product.getProductID()}">
-                    <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
-                    <select name="quantity" class="quantity-selector">
-                        <option th:each="i : ${#numbers.sequence(1, product.getProductQuantity())}"
-                                th:value="${i}"
-                                th:text="${i}">
-                        </option>
-                    </select>
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-            <span th:unless="${session.customer != null}">Login to purchase</span>
+    <tr th:each="p: ${products}">
+        <td th:text="${p.getProduct().getProductName()}"></td>
+        <td th:text="${p.getProduct().getProductDescription()}"></td>
+        <td th:text="'$' + ${p.getProduct().getProductPrice()}"></td>
+        <td th:text="${p.getProduct().getProductQuantity()}"></td>
+        <td><form th:if="${session.customer != null} and ${!p.isInCart()}" th:action="@{/addToCart}" method="post" style="display:inline;">
+            <input type="hidden" name = "customerID" th:value="${session.customer.getId()}" />
+            <input type="hidden" name = "productID" th:value="${p.getProduct().getProductID()}" />
+            <button type="submit" class="" onclick="return confirm('Add to cart?');">Add to Cart</button></form>
         </td>
     </tr>
     </tbody>
