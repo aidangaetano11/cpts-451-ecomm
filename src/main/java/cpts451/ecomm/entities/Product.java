@@ -2,12 +2,20 @@ package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+
 @Entity
 @Table
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // Product id will be incremented everytime a user is created
     private Integer productID;
+
+    @ManyToMany
+    @JoinTable(name = "productsInCart", joinColumns = {@JoinColumn(name = "productID")}, inverseJoinColumns = {@JoinColumn(name = "customerID")})
+    private Set<Customer> productsInCart = new HashSet<>();
 
     @Column(nullable = false)
     private String productName;
@@ -21,6 +29,15 @@ public class Product {
     @Column(nullable = false)
     private Integer productQuantity;
 
+    public void addCustomer(Customer customer) {
+        this.productsInCart.add(customer);
+    }
+
+    public Set<Customer> getProductsInCart() {
+        return this.productsInCart;
+    }
+
+
     public Product(String productName, String productDescription, Double productPrice, Integer productQuantity) {
         this.productName = productName;
         this.productDescription = productDescription;
@@ -29,7 +46,6 @@ public class Product {
     }
 
     public Product() {
-
     }
 
     public Integer getProductID() {
