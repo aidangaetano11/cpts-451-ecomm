@@ -29,8 +29,22 @@ public class CartController {
         }
 
         Cart cart = cartService.getOrCreateCart(customer);
+
+        double subTotal = calculateSubTotalPrice(cart);
+        double tax = subTotal * 0.10;
+        double total = subTotal + tax;
+
         model.addAttribute("cart", cart);
+        model.addAttribute("cartSubTotal", subTotal);
+        model.addAttribute("cartTotal", total);
+        model.addAttribute("tax", tax);
         return "cartPage";
+    }
+
+    private double calculateSubTotalPrice(Cart cart) {
+        return cart.getCartItems().stream()
+                .mapToDouble(cartItem -> cartItem.getProduct().getProductPrice() * cartItem.getQuantity())
+                .sum();
     }
 
     @PostMapping("/addToCart")

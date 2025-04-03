@@ -139,7 +139,23 @@
         </table>
 
         <div class="cart-summary">
+            <!-- Subtotal -->
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span th:text="'$' + ${#numbers.formatDecimal(cartSubTotal, 1, 2)}"></span>
+            </div>
 
+            <!-- Tax -->
+            <div class="summary-row">
+                <span>Tax (10%):</span>
+                <span th:text="'$' + ${#numbers.formatDecimal(tax, 1, 2)}"></span>
+            </div>
+
+            <!-- Total -->
+            <div class="summary-row" style="font-weight: bold; font-size: 1.1em;">
+                <span>Total:</span>
+                <span th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}"></span>
+            </div>
             <button class="checkout-btn">Proceed to Checkout</button>
         </div>
     </div>
