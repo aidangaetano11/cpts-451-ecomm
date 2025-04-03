@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Update Product</h1>
+
+<div id="flash" th:if="${error}" style="color: red">
+    <p th:text="${error}"></p>
+</div>
+
+<form action="" th:action="@{/updateProduct}" method="post">
+    <p>
+        <input id="productID" th:field="${product.productID}" type="hidden"/>
+    </p>
+
+    <p>
+        <label for="productName">Product Name:</label>
+        <input id="productName" th:field="${product.productName}" type="text" name="productName"/>
+    </p>
+    <p>
+        <label for="productDescription">Product Description:</label>
+        <input id="productDescription" th:field="${product.productDescription}" type="text" name="productDescription"/>
+        <br />
+    <p>
+        <label for="productPrice">Product Price ($):</label>
+        <input id="productPrice" th:field="${product.productPrice}"
+               type="number" name="productPrice"
+               min="0.01" step="0.01"
+               placeholder="0.00"/>
+    </p>
+    <p>
+        <label for="productQuantity">Product Quantity:</label>
+        <input id="productQuantity" th:field="${product.productQuantity}"
+               type="number" name="productQuantity"
+               min="0" step="1"
+               placeholder="0"/>
+    </p>
+    <p><input type="submit" value="Update Product" /></p>
+</form>
+
+<p>
+    <a href="/adminHome">Return to Admin Home</a>
+</p>
+</body>
+</html>
