@@ -129,22 +129,11 @@
                 <td th:text="'$' + ${#numbers.formatDecimal(item.product.productPrice, 1, 2)}"></td>
                 <td th:text="${item.quantity}"></td>
                 <td th:text="'$' + ${#numbers.formatDecimal(item.product.productPrice * item.quantity, 1, 2)}"></td>
-                <td>
-                    <form th:action="@{'/cart/remove/' + ${item.id}}" method="post">
-                        <button type="submit" class="remove-btn">Remove</button>
-                    </form>
-                </td>
             </tr>
             </tbody>
         </table>
 
         <div class="cart-summary">
-            <h3>Subtotal:
-                <span th:text="'$' + ${#numbers.formatDecimal(
-                    cart.cartItems.![product.productPrice * quantity].sum(),
-                    1, 2
-                )}"></span>
-            </h3>
             <button class="checkout-btn">Proceed to Checkout</button>
         </div>
     </div>

@@ -111,7 +111,7 @@
         <td th:text="${product.getProductQuantity()}"></td>
         <td>
             <div th:if="${session.customer != null}">
-                <form th:action="@{/addToCart}" method="post">
+                <form th:action="@{/cart/addToCart}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getProductID()}">
                     <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
                     <select name="quantity" class="quantity-selector">
