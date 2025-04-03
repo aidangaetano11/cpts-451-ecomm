@@ -92,6 +92,7 @@
         <th> Description </th>
         <th> Price </th>
         <th> Quantity </th>
+        <th> Cart </th>
     </tr>
     </thead>
     <tbody>
@@ -100,6 +101,11 @@
         <td th:text="${product.getProductDescription()}"></td>
         <td th:text="'$' + ${product.getProductPrice()}"></td>
         <td th:text="${product.getProductQuantity()}"></td>
+        <td><form th:action="@{/addToCart}" method="post" style="display:inline;">
+            <input type="hidden" name = "customerID" th:value="${session.customer.getId()}" />
+            <input type="hidden" name = "productID" th:value="${product.productID}" />
+            <button type="submit" class="" onclick="return confirm('Add to cart?');">Add</button></form>
+            </td>
     </tr>
     </tbody>
 </table>

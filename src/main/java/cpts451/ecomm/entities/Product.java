@@ -2,7 +2,8 @@ package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Product {
     private Integer productID;
 
     @ManyToMany(mappedBy = "cart", targetEntity = Customer.class)
-    private List<Product> productsInCart = new ArrayList<>();
+    private Set<Product> productsInCart = new HashSet<>();
 
     @Column(nullable = false)
     private String productName;
