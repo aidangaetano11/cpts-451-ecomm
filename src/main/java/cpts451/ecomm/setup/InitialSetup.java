@@ -38,5 +38,9 @@ public class InitialSetup implements CommandLineRunner {
 
         productRepository.save(new Product("Whole Wheat Bread", "A loaf of bread created with whole wheat.", 3.25, 12));
         System.out.println("Product created successfully!");
+
+        productRepository.save(new Product("Cookies", "A dozen chocolate chip cookies.", 5.50, 12));
+        System.out.println("Product created successfully!");
+
     }
 }

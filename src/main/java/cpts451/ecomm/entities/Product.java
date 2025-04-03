@@ -14,7 +14,7 @@ public class Product {
     private Integer productID;
 
     @ManyToMany(mappedBy = "cart", targetEntity = Customer.class)
-    private Set<Product> productsInCart = new HashSet<>();
+    private Set<Customer> productsInCart;
 
     @Column(nullable = false)
     private String productName;
@@ -28,14 +28,21 @@ public class Product {
     @Column(nullable = false)
     private Integer productQuantity;
 
+    public void addCustomer(Customer customer) {
+        productsInCart.add(customer);
+    }
+
+
     public Product(String productName, String productDescription, Double productPrice, Integer productQuantity) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        productsInCart = new HashSet<>();
     }
 
     public Product() {
+        productsInCart = new HashSet<>();
     }
 
     public Integer getProductID() {

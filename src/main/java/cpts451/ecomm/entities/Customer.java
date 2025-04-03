@@ -1,6 +1,7 @@
 package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -16,7 +17,7 @@ public class Customer extends User {
 
     @ManyToMany
     @JoinTable(name = "cart", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "productID"))
-    private Set<Product> cart = new HashSet<>();
+    private Set<Product> cart;
 
     public Set<Product> getProductsInCart() {
         return cart;
@@ -26,21 +27,19 @@ public class Customer extends User {
         cart.add(product);
     }
 
-    public boolean isProductInCart(int productID) {
-        for (Product product : cart) {
-            if (product.getProductID() == productID) {
-                return true;
-            }
-        }
-        return false;
-    }
+
+
+
+
 
 
     public Customer(String firstName, String lastName, String email, String phoneNumber, String password, String shippingAddress) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
         this.shippingAddress = shippingAddress;
+        cart = new HashSet<>();
     }
 
     public Customer() {
+        cart = new HashSet<>();
     }
 }

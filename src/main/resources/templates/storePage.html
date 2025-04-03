@@ -96,14 +96,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product: ${products}">
-        <td th:text="${product.getProductName()}"></td>
-        <td th:text="${product.getProductDescription()}"></td>
-        <td th:text="'$' + ${product.getProductPrice()}"></td>
-        <td th:text="${product.getProductQuantity()}"></td>
-        <td><form th:action="@{/addToCart}" method="post" style="display:inline;">
+    <tr th:each="p: ${products}">
+        <td th:text="${p.getProduct().getProductName()}"></td>
+        <td th:text="${p.getProduct().getProductDescription()}"></td>
+        <td th:text="'$' + ${p.getProduct().getProductPrice()}"></td>
+        <td th:text="${p.getProduct().getProductQuantity()}"></td>
+        <td><form th:if="${session.customer != null} and ${!p.isInCart()}" th:action="@{/addToCart}" method="post" style="display:inline;">
             <input type="hidden" name = "customerID" th:value="${session.customer.getId()}" />
-            <input type="hidden" name = "productID" th:value="${product.productID}" />
+            <input type="hidden" name = "productID" th:value="${p.getProduct().getProductID()}" />
             <button type="submit" class="" onclick="return confirm('Add to cart?');">Add</button></form>
             </td>
     </tr>
