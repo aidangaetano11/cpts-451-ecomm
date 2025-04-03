@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
 public class StoreController {
     private final ProductService productService;
@@ -34,12 +36,16 @@ public class StoreController {
         Iterable<Product> products = productService.findAll();
         List<ProductExtension> productExtensions = new ArrayList<ProductExtension>();
         for (Product product : products) {
+            //System.out.println(product.getProductID());
+            //System.out.println(product.getProductsInCart().toString());
             ProductExtension ext;
             if (session.getAttribute("customer") != null && addToCartService.isProductInCart(((Customer)session.getAttribute("customer")).getId(), product.getProductID())) {
+
                 ext = new ProductExtension(product, true);
             }
             else {
                 ext = new ProductExtension(product, false);
+
             }
             productExtensions.add(ext);
         }
@@ -48,9 +54,14 @@ public class StoreController {
         return "storePage";
     }
 
-    @RequestMapping("/addToCart")
+    @RequestMapping(value = "/addToCart", method = POST)
     public String addToCart(@RequestParam Integer customerID, @RequestParam Integer productID, Model model, HttpSession session) {
-        customerService.find(customerID).putInCart(productService.find(productID));
+        Customer c = customerService.find(customerID);
+        Product p = productService.find(productID);
+        p.addCustomer(c);
+        productService.save(p);
+        //customerService.find(customerID).putInCart(productService.find(productID));
+        //productService.find(productID).addCustomer(customerService.find(customerID));
         return "redirect:/storePage";
     }
 }

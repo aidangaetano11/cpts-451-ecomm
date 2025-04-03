@@ -15,9 +15,8 @@ import java.util.Set;
 public class Customer extends User {
     private String shippingAddress;
 
-    @ManyToMany
-    @JoinTable(name = "cart", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "productID"))
-    private Set<Product> cart;
+    @ManyToMany(mappedBy = "productsInCart")
+    private Set<Product> cart = new HashSet<>();
 
     public Set<Product> getProductsInCart() {
         return cart;
@@ -36,10 +35,8 @@ public class Customer extends User {
     public Customer(String firstName, String lastName, String email, String phoneNumber, String password, String shippingAddress) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
         this.shippingAddress = shippingAddress;
-        cart = new HashSet<>();
     }
 
     public Customer() {
-        cart = new HashSet<>();
     }
 }

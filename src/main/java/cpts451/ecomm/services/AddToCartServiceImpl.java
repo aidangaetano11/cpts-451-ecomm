@@ -1,13 +1,8 @@
 package cpts451.ecomm.services;
 
-import cpts451.ecomm.entities.Customer;
 import cpts451.ecomm.entities.Product;
-import cpts451.ecomm.exceptions.ExistingAttributeException;
-import cpts451.ecomm.exceptions.MissingFieldException;
-import cpts451.ecomm.repositories.AdminRepository;
 import cpts451.ecomm.repositories.CustomerRepository;
 import cpts451.ecomm.repositories.ProductRepository;
-import cpts451.ecomm.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,8 +30,9 @@ public class AddToCartServiceImpl implements AddToCartService{
 
     @Override
     public boolean isProductInCart(Integer customerID, Integer productID) {
-        List<Product> productsInCart = productRepository.findProductsInCart(customerID);
+        List<Product> productsInCart = productRepository.findProductByCustomerID(customerID);
         for (Product product : productsInCart) {
+            System.out.println(product.getProductID());
             if (product.getProductID().equals(productID)) {
                 return true;
             }

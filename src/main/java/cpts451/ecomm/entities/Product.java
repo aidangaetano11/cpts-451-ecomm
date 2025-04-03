@@ -13,8 +13,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // Product id will be incremented everytime a user is created
     private Integer productID;
 
-    @ManyToMany(mappedBy = "cart", targetEntity = Customer.class)
-    private Set<Customer> productsInCart;
+    @ManyToMany
+    @JoinTable(name = "productsInCart", joinColumns = {@JoinColumn(name = "productID")}, inverseJoinColumns = {@JoinColumn(name = "customerID")})
+    private Set<Customer> productsInCart = new HashSet<>();
 
     @Column(nullable = false)
     private String productName;
@@ -29,7 +30,11 @@ public class Product {
     private Integer productQuantity;
 
     public void addCustomer(Customer customer) {
-        productsInCart.add(customer);
+        this.productsInCart.add(customer);
+    }
+
+    public Set<Customer> getProductsInCart() {
+        return this.productsInCart;
     }
 
 
@@ -38,11 +43,9 @@ public class Product {
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
-        productsInCart = new HashSet<>();
     }
 
     public Product() {
-        productsInCart = new HashSet<>();
     }
 
     public Integer getProductID() {
