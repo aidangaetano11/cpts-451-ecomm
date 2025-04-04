@@ -21,6 +21,7 @@ public class CustomerController {
             throw new NullPointerException("Customer not found in session.");
         }
 
+        model.addAttribute("userId", customer.getId());
         model.addAttribute("customerFirstName", customer.getFirstName());
         model.addAttribute("customerLastName", customer.getLastName());
         model.addAttribute("customerEmail", customer.getEmail());

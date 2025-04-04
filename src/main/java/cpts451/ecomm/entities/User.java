@@ -91,6 +91,8 @@ public abstract class User {
 
     public Integer getId() { return userId; }
 
+    public void setId(int id) { userId = id; }
+
     public byte[] getSalt() { return this.salt; }
 
     public byte[] getHash() { return this.hash; }

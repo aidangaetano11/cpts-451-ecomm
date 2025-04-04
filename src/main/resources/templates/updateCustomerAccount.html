@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .return-link {
+        padding: 5px 10px;
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Update Customer Account</h1>
+
+<div id="flash" th:if="${errorMessage}" style="color: red">
+  <p th:text="${errorMessage}"></p>
+</div>
+
+<form action="" th:action="@{/updateCustomerAccount}" method="post">
+  <p><input th:value="${id}" type="hidden" name="userId"/></p>
+  <p>First Name: <input th:field="${customer.firstName}" type="text" name="firstName" /></p>
+  <p>Last Name: <input th:field="${customer.lastName}" type="text" name="lastName" /></p>
+  <br />
+  <p>Email: <input th:field="${customer.email}" type="text" name="email" /></p>
+  <p>Phone Number: <input th:field="${customer.phoneNumber}" type="text" name="phoneNumber" /></p>
+  <p>Password: <input th:field="${customer.password}" type="password" name="password"  required="required"/></p>
+  <p><input type="submit" value="Update Account" /></p>
+</form>
+
+<p>
+  <br>
+  <br>
+  <a href="/customerHome" class="return">Back to Account Details</a>
+</p>
+</body>
+</html>
