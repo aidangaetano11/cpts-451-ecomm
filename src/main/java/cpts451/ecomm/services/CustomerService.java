@@ -8,4 +8,6 @@ public interface CustomerService {
     Iterable<Customer> findAll();
 
     Customer save(Customer customer);
+
+    public void deleteById(int id);
 }

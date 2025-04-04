@@ -11,6 +11,22 @@
             text-decoration: none;
             border-radius: 4px;
         }
+        .update-account-link {
+            padding: 3px 6px;
+            font-size: 12px;
+            background: #ffc300;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .delete-account-link {
+            padding: 3px 6px;
+            font-size: 12px;
+            background: #cf1b27;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -19,6 +35,11 @@
 <h2>Account Details </h2>
 <h3 th:text="'Email: ' + ${customerEmail}"></h3>
 <h3 th:text="'Phone Number: ' + ${customerPhoneNumber}"></h3>
+
+<a th:href="@{/updateCustomerAccountPage(userId=${userId})}" class="update-account-link">Update Account</a>
+<form th:action="@{/deleteCustomerAccount}" method="post" style="display:inline;">
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <button type="submit" class="delete-account-link" onclick="return confirm('Delete Account?');">Delete Account</button> </form>
 
 <p>
     <a href="/storePage" class="store-page-link">Back to Store Page</a>

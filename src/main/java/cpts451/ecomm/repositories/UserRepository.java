@@ -11,4 +11,7 @@ public interface UserRepository extends CrudRepository<User, Integer>
 
     @Query("SELECT u FROM User u WHERE u.phoneNumber =:phoneNumber")
     User findByPhoneNumber(String phoneNumber);
+
+    @Query("SELECT u FROM User u WHERE u.userId =:userId")
+    User findById(int userId);
 }

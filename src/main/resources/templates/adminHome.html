@@ -43,6 +43,11 @@
 <h3 th:text="'Email: ' + ${adminEmail}"></h3>
 <h3 th:text="'Phone Number: ' + ${adminPhoneNumber}"></h3>
 
+<a th:href="@{/updateAdminAccountPage(userId=${userId})}" class="update-product-link">Update Account</a>
+<form th:action="@{/deleteAdminAccount}" method="post" style="display:inline;">
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <button type="submit" class="delete-product-link" onclick="return confirm('Delete Account?');">Delete Account</button> </form>
+
 <a href="/createProductPage" class="create-product-link">Create New Product</a>
 
 <h3>List of Products:</h3>

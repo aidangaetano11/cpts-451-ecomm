@@ -27,6 +27,7 @@ public class AdminController {
 
         assert admin != null;
 
+        model.addAttribute("userId", admin.getId());
         model.addAttribute("adminFirstName", admin.getFirstName());
         model.addAttribute("adminLastName", admin.getLastName());
         model.addAttribute("adminEmail", admin.getEmail());

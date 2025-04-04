@@ -8,4 +8,6 @@ public interface AdminService {
     public Iterable<Admin> findAll();
 
     public Admin save(Admin admin);
+
+    public void deleteById(int id);
 }
