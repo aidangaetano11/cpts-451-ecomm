@@ -101,6 +101,7 @@
         <th> Price </th>
         <th> Quantity </th>
         <th> Cart </th>
+        <th> Review </th>
     </tr>
     </thead>
     <tbody>
@@ -125,10 +126,43 @@
             </div>
             <span th:unless="${session.customer != null}">Login to purchase</span>
         </td>
+        <td>
+            <div th:if="${session.customer != null}">
+                <form th:action="@{/createReviewProductPage}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.getProductID()}">
+                    <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
+                    <button type="submit">Leave Review</button>
+                </form>
+            </div>
+            <span th:unless="${session.customer != null}">Login to review</span>
+        </td>
     </tr>
     </tbody>
 </table>
+
 <br>
+
+<h3>List of Reviews:</h3>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Product </th>
+        <th> User </th>
+        <th> Rating </th>
+        <th> Date </th>
+        <th> Comment </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reviewProduct: ${reviewProduct}">
+        <td th:text="${reviewProduct.getProduct().getProductName()}"></td>
+        <td th:text="${reviewProduct.getCustomer().getFirstName() + ' ' + reviewProduct.getCustomer().getLastName()}"></td>
+        <td th:text="${reviewProduct.getRating()}"></td>
+        <td th:text="${reviewProduct.getDate()}"></td>
+        <td th:text="${reviewProduct.getComment()}"></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

@@ -9,8 +9,8 @@ public abstract class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reviewId;
 
-    @JoinColumn(nullable = false)
     @ManyToOne
+    @JoinColumn(name = "customer_id")  // Foreign key for customer
     private Customer customer;
 
     @Column(nullable = false)
@@ -29,7 +29,9 @@ public abstract class Review {
         this.date = dat;
     }
 
-    public Integer getreviewId() {
+    public Review() {    }
+
+    public Integer getReviewId() {
         return reviewId;
     }
 
