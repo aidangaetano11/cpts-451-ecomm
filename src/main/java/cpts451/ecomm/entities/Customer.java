@@ -15,6 +15,9 @@ import java.util.Set;
 public class Customer extends User {
     private String shippingAddress;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ReviewProduct> reviewProduct = new ArrayList<>();
+
     public Customer(String firstName, String lastName, String email, String phoneNumber, String password, String shippingAddress) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
         this.shippingAddress = shippingAddress;
@@ -22,4 +25,8 @@ public class Customer extends User {
 
     public Customer() {
     }
+
+    public List<ReviewProduct> getReviewProduct() { return reviewProduct; }
+
+    public void setReviewProduct(List<ReviewProduct> reviewProduct) { this.reviewProduct = reviewProduct; }
 }

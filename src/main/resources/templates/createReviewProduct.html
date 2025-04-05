@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="'Create New Review for ' + ${reviewProduct.product.productName}"></h1>
+
+<div id="flash" th:if="${error}" style="color: red">
+    <p th:text="${error}"></p>
+</div>
+
+<form action="" th:action="@{/createReviewProduct}" th:object="${reviewProduct}" method="post">
+    <p>
+        <input id="reviewProductId" th:field="${reviewProduct.reviewId}" type="hidden"/>
+    </p>
+    <p>
+        <input id="reviewProductProduct" th:field="${reviewProduct.product}" type="hidden"/>
+    </p>
+    <p>
+        <input id="reviewProductCustomer" th:field="${reviewProduct.customer}" type="hidden"/>
+    </p>
+    <p>
+        <input id="reviewProductDate" th:field="${reviewProduct.date}" type="hidden"/>
+    </p>
+
+    <p>
+        <label for="reviewProductRating">Rating (0-5):</label>
+        <input id="reviewProductRating" th:field="${reviewProduct.rating}"
+               type="number" name="reviewProductRating"
+               min="0" step="1"
+               placeholder="0-5" required="required"/>
+    </p>
+        <br/>
+    <p>
+        <label for="reviewProductComment">Review Comment:</label>
+        <input id="reviewProductComment" th:field="${reviewProduct.comment}" type="text" name="reviewProductComment"/>
+    </p>
+    <p><input type="submit" value="Leave Review" /></p>
+</form>
+
+<p>
+    <a href="/storePage">Return to Store</a>
+</p>
+</body>
+</html>

@@ -2,6 +2,7 @@ package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
@@ -24,6 +25,9 @@ public class Product {
 
     @Column(nullable = false)
     private Integer productQuantity;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
     public Product(String productName, String productDescription, Double productPrice, Integer productQuantity) {
         this.productName = productName;
@@ -74,4 +78,9 @@ public class Product {
     public void setProductQuantity(Integer productQuantity) {
         this.productQuantity = productQuantity;
     }
+
+    public List<ReviewProduct> getReviewProduct() { return reviewProduct; }
+
+    public void setReviewProduct(List<ReviewProduct> reviewProduct) { this.reviewProduct = reviewProduct; }
+
 }
