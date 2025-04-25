@@ -28,7 +28,7 @@ public class CreateCategoryController {
     public String createCategory(@ModelAttribute Category category, Model model) {
         try {
             createCategoryService.CreateNewCategory(category);
-            return "redirect:/adminHome";
+            return "redirect:/createProductPage";
         } catch (MissingFieldException e) {
             model.addAttribute("error", e.getMessage());
             return "createCategory";
