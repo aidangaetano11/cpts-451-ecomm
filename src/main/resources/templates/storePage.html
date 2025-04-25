@@ -22,6 +22,32 @@
             align-items: center;
             gap: 15px;
         }
+        .product-container {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .reviews-container {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        .review-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -92,25 +118,17 @@
     </div>
 </div>
 
-<h3>List of Products:</h3>
-<table style="border: solid">
-    <thead>
-    <tr>
-        <th> Name </th>
-        <th> Description </th>
-        <th> Price </th>
-        <th> Quantity </th>
-        <th> Cart </th>
-        <th> Review </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product: ${products}">
-        <td th:text="${product.getProductName()}"></td>
-        <td th:text="${product.getProductDescription()}"></td>
-        <td th:text="'$' + ${product.getProductPrice()}"></td>
-        <td th:text="${product.getProductQuantity()}"></td>
-        <td>
+<h3>Products:</h3>
+
+<div th:each="product: ${products}" class="product-container">
+    <div class="product-details">
+        <div>
+            <h4 th:text="${product.getProductName()}"></h4>
+            <p th:text="${product.getProductDescription()}"></p>
+            <p th:text="'Price: $' + ${product.getProductPrice()}"></p>
+            <p th:text="'Quantity Available: ' + ${product.getProductQuantity()}"></p>
+        </div>
+        <div class="product-actions">
             <div th:if="${session.customer != null}">
                 <form th:action="@{/cart/addToCart}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getProductID()}">
@@ -123,46 +141,41 @@
                     </select>
                     <button type="submit">Add to Cart</button>
                 </form>
-            </div>
-            <span th:unless="${session.customer != null}">Login to purchase</span>
-        </td>
-        <td>
-            <div th:if="${session.customer != null}">
                 <form th:action="@{/createReviewProductPage}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getProductID()}">
                     <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
                     <button type="submit">Leave Review</button>
                 </form>
             </div>
-            <span th:unless="${session.customer != null}">Login to review</span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            <div th:unless="${session.customer != null}">
+                <p>Login to purchase or review</p>
+            </div>
+        </div>
+    </div>
 
-<br>
+    <div class="reviews-container">
+        <h5>Reviews:</h5>
+        <!-- Count matching reviews -->
+        <th:block th:with="reviewCount=${0}">
+            <div th:each="review : ${reviewProduct}"
+                 th:if="${review.getProduct().getProductID() == product.getProductID()}"
+                 th:with="reviewCount=${reviewCount + 1}"
+                 class="review-item">
+                <p>
+                    <strong th:text="${review.getCustomer().getFirstName() + ' ' + review.getCustomer().getLastName()}"></strong>
+                    <span th:text="' - Rating: ' + ${review.getRating()} + '/5'"></span>
+                </p>
+                <p th:text="${review.getComment()}"></p>
+                <small th:text="${review.getDate()}"></small>
+            </div>
+        </th:block>
 
-<h3>List of Reviews:</h3>
-<table style="border: solid">
-    <thead>
-    <tr>
-        <th> Product </th>
-        <th> User </th>
-        <th> Rating </th>
-        <th> Date </th>
-        <th> Comment </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="reviewProduct: ${reviewProduct}">
-        <td th:text="${reviewProduct.getProduct().getProductName()}"></td>
-        <td th:text="${reviewProduct.getCustomer().getFirstName() + ' ' + reviewProduct.getCustomer().getLastName()}"></td>
-        <td th:text="${reviewProduct.getRating()}"></td>
-        <td th:text="${reviewProduct.getDate()}"></td>
-        <td th:text="${reviewProduct.getComment()}"></td>
-    </tr>
-    </tbody>
-</table>
+        <!-- Show message if no reviews found -->
+        <div th:if="${reviewCount == 0}">
+            <p>No reviews yet for this product.</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
