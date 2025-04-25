@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Create New Category</h1>
+
+<div id="flash" th:if="${error}" style="color: red">
+  <p th:text="${error}"></p>
+</div>
+
+<form action="" th:action="@{/createCategory}" method="post">
+  <p>
+    <label for="categoryName">Category Name:</label>
+    <input id="categoryName" th:field="${category.categoryName}" type="text" name="categoryName"/>
+  </p>
+  <p><input type="submit" value="Create Category" /></p>
+</form>
+
+</body>
+</html>

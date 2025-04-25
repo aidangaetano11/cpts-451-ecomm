@@ -1,4 +1,4 @@
-﻿package cpts451.ecomm.controllers;
+package cpts451.ecomm.controllers;
 
 import cpts451.ecomm.entities.Category;
 import cpts451.ecomm.exceptions.MissingFieldException;
