@@ -61,6 +61,14 @@ public class StoreController {
                 return products.stream()
                         .sorted(Comparator.comparing(Product::getProductName).reversed())
                         .collect(Collectors.toList());
+            case "category":
+                return products.stream()
+                        .sorted(Comparator.comparing(p -> p.getProductCategory().getCategoryName()))
+                        .collect(Collectors.toList());
+            case "categoryDesc":
+                return products.stream()
+                        .sorted(Comparator.comparing((Product p) -> p.getProductCategory().getCategoryName()).reversed())
+                        .collect(Collectors.toList());
             case "price":
                 return products.stream()
                         .sorted(Comparator.comparing(Product::getProductPrice))
