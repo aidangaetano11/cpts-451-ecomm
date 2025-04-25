@@ -8,11 +8,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    // Category id will be incremented everytime a category is created
     private Integer categoryID;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String categoryName;
 
-    public Category(Integer categoryID, String categoryName) {
-        this.categoryID = categoryID;
+    public Category(String categoryName) {
         this.categoryName = categoryName;
     }
 

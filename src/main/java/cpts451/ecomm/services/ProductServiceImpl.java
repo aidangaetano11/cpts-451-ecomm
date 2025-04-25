@@ -4,6 +4,8 @@ import cpts451.ecomm.entities.Product;
 import cpts451.ecomm.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;

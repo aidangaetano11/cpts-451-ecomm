@@ -4,6 +4,7 @@ import cpts451.ecomm.entities.Admin;
 import cpts451.ecomm.entities.Product;
 import cpts451.ecomm.exceptions.ExistingAttributeException;
 import cpts451.ecomm.exceptions.MissingFieldException;
+import cpts451.ecomm.services.CategoryService;
 import cpts451.ecomm.services.CreateProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CreateProductController {
 
     private final CreateProductService createProductService;
+    private final CategoryService categoryService;
 
-    public CreateProductController(CreateProductService createProductService) {
+    public CreateProductController(CreateProductService createProductService, CategoryService categoryService) {
         this.createProductService = createProductService;
+        this.categoryService = categoryService;
     }
 
     @RequestMapping("/createProductPage")
     public String showCreateProductPage(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("categories", categoryService.findAll());
         return "createProduct";
     }
 

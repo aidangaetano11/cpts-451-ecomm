@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .create-category-link {
+            padding: 5px 10px;
+            background: #009e04;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 <h1>Create New Product</h1>
@@ -34,6 +43,18 @@
                min="0" step="1"
                placeholder="0"/>
     </p>
+    <p>
+        <label for="productCategory">Category:</label>
+        <select id="productCategory" name="productCategory" required>
+            <option value="">Select a Category</option>
+            <option th:each="category : ${categories}"
+                    th:value="${category.categoryID}"
+                    th:text="${category.categoryName}">
+            </option>
+        </select>
+        <a href="/createCategoryPage" class="create-category-link">Create New Category</a>
+    </p>
+    <br>
     <p><input type="submit" value="Create Product" /></p>
 </form>
 

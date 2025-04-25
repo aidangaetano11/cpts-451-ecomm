@@ -20,6 +20,10 @@ public class Product {
     @Column(nullable = false)
     private String productDescription;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category productCategory;
+
     @Column(nullable = false)
     private Double productPrice;
 
@@ -29,11 +33,12 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
-    public Product(String productName, String productDescription, Double productPrice, Integer productQuantity) {
+    public Product(String productName, String productDescription, Double productPrice, Integer productQuantity, Category productCategory) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        this.productCategory = productCategory;
     }
 
     public Product() {
@@ -62,6 +67,10 @@ public class Product {
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
+
+    public Category getProductCategory() { return productCategory; }
+
+    public void setProductCategory(Category productCategory) { this.productCategory = productCategory; }
 
     public Double getProductPrice() {
         return productPrice;

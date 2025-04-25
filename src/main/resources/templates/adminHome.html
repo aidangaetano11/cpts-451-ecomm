@@ -56,6 +56,7 @@
     <tr>
         <th> Name </th>
         <th> ID </th>
+        <th> Category </th>
         <th> Description </th>
         <th> Price </th>
         <th> Quantity </th>
@@ -67,6 +68,7 @@
     <tr th:each="product: ${products}">
         <td th:text="${product.getProductName()}"></td>
         <td th:text="${product.getProductID()}"></td>
+        <td th:text="${product.getProductCategory().categoryName}"></td>
         <td th:text="${product.getProductDescription()}"></td>
         <td th:text="'$' + ${product.getProductPrice()}"></td>
         <td th:text="${product.getProductQuantity()}"></td>
