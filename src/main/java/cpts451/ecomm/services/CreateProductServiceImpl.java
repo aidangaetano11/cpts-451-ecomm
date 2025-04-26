@@ -19,7 +19,7 @@ public class CreateProductServiceImpl implements CreateProductService {
     public void CreateNewProduct(Product product)
     {
         ValidateNullFields(product);
-
+        product.setProductSold(0);
         productRepository.save(product);
     }
 
