@@ -57,6 +57,7 @@
         <th> Name </th>
         <th> ID </th>
         <th> Category </th>
+        <th> Rating </th>
         <th> Description </th>
         <th> Price </th>
         <th> Quantity </th>
@@ -71,6 +72,7 @@
         <td th:text="${product.getProductName()}"></td>
         <td th:text="${product.getProductID()}"></td>
         <td th:text="${product.getProductCategory().categoryName}"></td>
+        <td th:text="${product.getAverageRating()}"></td>
         <td th:text="${product.getProductDescription()}"></td>
         <td th:text="'$' + ${#numbers.formatDecimal(product.getProductPrice(), 1, 2)}"></td>
         <td th:text="${product.getProductQuantity()}"></td>
