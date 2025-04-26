@@ -28,7 +28,6 @@ public class Product {
     @Column(nullable = false)
     private Integer productQuantity;
 
-
     @Column(nullable = false)
     private Integer productSold;
 
@@ -104,8 +103,22 @@ public class Product {
 
     public void setReviewProduct(List<ReviewProduct> reviewProduct) { this.reviewProduct = reviewProduct; }
 
-
     public Integer getProductSold() { return productSold; }
 
     public void setProductSold(Integer productSold) { this.productSold = productSold; }
+
+    // This will be calculated elsewhere so it won't be stored on the product.
+    @Transient
+    public Double getAverageRating()
+    {
+        if (this.reviewProduct == null || this.reviewProduct.isEmpty())
+        {
+            return 0.0;
+        }
+
+        return this.reviewProduct.stream()
+                .mapToDouble(ReviewProduct::getRating)
+                .average()
+                .orElse(0.0);
+    }
 }

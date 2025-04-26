@@ -2,6 +2,7 @@ package cpts451.ecomm.controllers;
 import cpts451.ecomm.entities.Admin;
 import cpts451.ecomm.entities.Customer;
 import cpts451.ecomm.entities.Product;
+import cpts451.ecomm.entities.Review;
 import cpts451.ecomm.services.CartService;
 import cpts451.ecomm.services.ProductService;
 import cpts451.ecomm.services.ReviewProductService;
@@ -68,6 +69,14 @@ public class StoreController {
             case "categoryDesc":
                 return products.stream()
                         .sorted(Comparator.comparing((Product p) -> p.getProductCategory().getCategoryName()).reversed())
+                        .collect(Collectors.toList());
+            case "rating":
+                return products.stream()
+                        .sorted(Comparator.comparing(Product::getAverageRating).reversed())
+                        .collect(Collectors.toList());
+            case "ratingDesc":
+                return products.stream()
+                        .sorted(Comparator.comparing(Product::getAverageRating))
                         .collect(Collectors.toList());
             case "price":
                 return products.stream()

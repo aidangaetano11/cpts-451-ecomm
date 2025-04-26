@@ -129,6 +129,8 @@
             <option value="nameDesc">Name (Z-A)</option>
             <option value="category">Category (A-Z)</option>
             <option value="categoryDesc">Category (Z-A)</option>
+            <option value="rating">Rating (High to Low)</option>
+            <option value="ratingDesc">Rating (Low to High)</option>
             <option value="price">Price (Low to High)</option>
             <option value="priceDesc">Price (High to Low)</option>
             <option value="quantity">Quantity (Low to High)</option>
@@ -144,6 +146,7 @@
             <h3 th:text="${product.getProductName()}"></h3>
             <p><strong>Category: </strong> <span th:text="${product.getProductCategory().categoryName}"></span></p>
             <p><strong>Description: </strong> <span th:text="${product.getProductDescription()}"></span></p>
+            <p><strong>Rating: </strong> <span th:text="${product.getAverageRating()}"></span></p>
             <p><strong>Price: </strong> <span th:text="'$' + ${product.getProductPrice()}"></span></p>
             <p><strong>Quantity: </strong> <span th:text="${product.getProductQuantity()}"></span></p>
         </div>
