@@ -30,9 +30,10 @@ public class Product {
     @Column(nullable = false)
     private Integer productQuantity;
 
+    /*
     @Column(nullable = false)
     private Integer productSold;
-
+    */
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
@@ -42,7 +43,7 @@ public class Product {
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
         this.productCategory = productCategory;
-        this.productSold = 0;
+        //this.productSold = 0;
     }
 
     public Product() {
@@ -96,7 +97,8 @@ public class Product {
 
     public void setReviewProduct(List<ReviewProduct> reviewProduct) { this.reviewProduct = reviewProduct; }
 
+    /*
     public Integer getProductSold() { return productSold; }
 
-    public void setProductSold(Integer productSold) { this.productSold = productSold; }
+    public void setProductSold(Integer productSold) { this.productSold = productSold; }*/
 }
