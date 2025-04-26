@@ -10,4 +10,6 @@ public interface ReviewProductService {
     ReviewProduct save(ReviewProduct reviewProduct);
 
     void deleteById(Integer reviewId);
+
+    void deleteByProductId(Integer productID);
 }

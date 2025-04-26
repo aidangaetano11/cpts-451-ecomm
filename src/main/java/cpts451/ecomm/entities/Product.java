@@ -30,7 +30,7 @@ public class Product {
     @Column(nullable = false)
     private Integer productQuantity;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
     public Product(String productName, String productDescription, Double productPrice, Integer productQuantity, Category productCategory) {
