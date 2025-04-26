@@ -1,4 +1,4 @@
-﻿package cpts451.ecomm.controllers;
+package cpts451.ecomm.controllers;
 
 import cpts451.ecomm.entities.Cart;
 import cpts451.ecomm.entities.Customer;

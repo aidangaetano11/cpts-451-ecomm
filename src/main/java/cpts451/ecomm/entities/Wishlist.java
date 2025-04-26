@@ -1,4 +1,4 @@
-﻿package cpts451.ecomm.entities;
+package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
