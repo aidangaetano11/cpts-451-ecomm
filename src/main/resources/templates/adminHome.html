@@ -70,7 +70,7 @@
         <td th:text="${product.getProductID()}"></td>
         <td th:text="${product.getProductCategory().categoryName}"></td>
         <td th:text="${product.getProductDescription()}"></td>
-        <td th:text="'$' + ${product.getProductPrice()}"></td>
+        <td th:text="'$' + ${#numbers.formatDecimal(product.getProductPrice(), 1, 2)}"></td>
         <td th:text="${product.getProductQuantity()}"></td>
         <td> <a th:href="@{/updateProductPage(productId=${product.productID})}" class="update-product-link">Update Product</a> </td>
         <td> <form th:action="@{/deleteProduct}" method="post" style="display:inline;">
