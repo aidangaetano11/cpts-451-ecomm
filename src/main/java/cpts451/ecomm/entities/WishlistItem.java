@@ -20,6 +20,7 @@ public class WishlistItem {
 
     public void setWishlist(Wishlist wishlist) { this.wishlist = wishlist; }
 
+
     public Product getProduct() { return product; }
 
     public void setProduct(Product product) { this.product = product; }

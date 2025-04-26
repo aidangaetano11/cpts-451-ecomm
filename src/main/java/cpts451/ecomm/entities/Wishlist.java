@@ -25,4 +25,6 @@ public class Wishlist {
     public List<WishlistItem> getWishlistItems() { return wishlistItems; }
 
     public void setWishlistItems(List<WishlistItem> wishlistItems) { this.wishlistItems = wishlistItems; }
+
+    public void addWishlistItem(WishlistItem wishlistItem) { this.getWishlistItems().add(wishlistItem); }
 }
