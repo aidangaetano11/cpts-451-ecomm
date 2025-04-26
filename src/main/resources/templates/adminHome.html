@@ -60,6 +60,8 @@
         <th> Description </th>
         <th> Price </th>
         <th> Quantity </th>
+        <th> Amount Sold </th>
+        <th> Money Made </th>
         <th> Update </th>
         <th> Delete </th>
     </tr>
@@ -72,6 +74,8 @@
         <td th:text="${product.getProductDescription()}"></td>
         <td th:text="'$' + ${#numbers.formatDecimal(product.getProductPrice(), 1, 2)}"></td>
         <td th:text="${product.getProductQuantity()}"></td>
+        <td th:text="${product.getProductSold()}"></td>
+        <td th:text="'$' + ${#numbers.formatDecimal(product.getProductPrice() * product.getProductSold(), 1, 2)}"></td>
         <td> <a th:href="@{/updateProductPage(productId=${product.productID})}" class="update-product-link">Update Product</a> </td>
         <td> <form th:action="@{/deleteProduct}" method="post" style="display:inline;">
             <input type="hidden" name="productId" th:value="${product.productID}" />
