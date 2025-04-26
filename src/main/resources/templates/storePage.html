@@ -85,6 +85,13 @@
             text-decoration: none;
             border-radius: 4px;
         }
+        .wishlist-link {
+            padding: 5px 10px;
+            background: #da8026;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
         .logout-link {
             padding: 5px 10px;
             background: #f44336;
@@ -104,6 +111,7 @@
             <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
             <a href="/customerHome" class="account-link">Account</a>
             <a href="/cart" class="cart-link">Cart</a>
+            <a href="/wishlist" class="wishlist-link">Wishlist</a>
             <a href="/logout" class="logout-link">Logout</a>
         </span>
         <span th:if="${session.admin != null}">
@@ -162,6 +170,11 @@
                         </option>
                     </select>
                     <button type="submit">Add to Cart</button>
+                </form>
+                <form th:action="@{/wishlist/addToWishlist}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.getProductID()}">
+                    <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
+                    <button type="submit">Add to Wishlist</button>
                 </form>
                 <form th:action="@{/createReviewProductPage}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getProductID()}">

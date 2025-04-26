@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .wishlist-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .wishlist-items {
+            width: 100%;
+            table-layout: fixed;
+        }
+        .wishlist-items th, .wishlist-items td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .cart-items th {
+            background-color: #f2f2f2;
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .empty-wishlist {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+        .continue-shopping {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .logout-link {
+            padding: 5px 10px;
+            background: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .account-link {
+            padding: 5px 10px;
+            background: #2dcbbf;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Your Wishlist</h1>
+    <div class="user-info">
+        <!-- Keep the same user info section as store page -->
+        <span th:if="${session.customer != null}">
+            <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
+            <a href="/customerHome" class="account-link">Account</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+    </div>
+</div>
+
+<div class="wishlist-container">
+    <div th:if="${wishlist != null and !wishlist.wishlistItems.isEmpty()}">
+        <table class="wishlist-items">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${wishlist.wishlistItems}">
+                <td>
+                    <div class="product-info">
+                        <div>
+                            <div th:text="${item.product.productName}"></div>
+                            <div th:text="${item.product.productDescription}"
+                                 style="font-size: 0.8em; color: #666;"></div>
+                        </div>
+                    </div>
+                </td>
+                <td th:text="'$' + ${#numbers.formatDecimal(item.product.productPrice, 1, 2)}"></td>
+                <td>
+                    <form th:action="@{'/wishlist/remove/' + ${item.getProduct().getProductID()}}" method="post">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                    <form th:action="@{/cart/addToCart}" method="post">
+                        <input type="hidden" name="productId" th:value="${item.getProduct().getProductID()}">
+                        <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
+                        <select name="quantity" class="quantity-selector">
+                            <option th:each="i : ${#numbers.sequence(1, item.getProduct().getProductQuantity())}"
+                                    th:value="${i}"
+                                    th:text="${i}">
+                            </option>
+                        </select>
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${wishlist == null or wishlist.wishlistItems.isEmpty()}" class="empty-wishlist">
+        <p>Your wishlist is empty</p>
+        <a href="/storePage" class="continue-shopping">Continue Shopping</a>
+    </div>
+</div>
+</body>
+</html>
