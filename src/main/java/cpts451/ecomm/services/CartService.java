@@ -10,4 +10,6 @@ public interface CartService {
     void addToCart(Customer customer, Product product, int quantity);
 
     void removeFromCart(Customer customer, int productId);
+
+    double getTotalPrice(Customer customer);
 }

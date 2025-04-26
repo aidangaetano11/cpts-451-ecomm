@@ -67,4 +67,19 @@ public class CartServiceImpl implements CartService {
         cart.getCartItems().removeIf(cartItem -> cartItem.getProduct().getProductID().equals(productID));
         cartRepository.save(cart);
     }
+
+    @Override
+    public double getTotalPrice(Customer customer)
+    {
+        Cart cart = getOrCreateCart(customer);
+        List<CartItem> cartItem = cart.getCartItems();
+        double price = 0.0;
+
+        for (int i = 0; i < cartItem.size(); i++)
+        {
+            price += cartItem.get(i).getProduct().getProductPrice() * cartItem.get(i).getQuantity();
+        }
+
+        return price;
+    }
 }
