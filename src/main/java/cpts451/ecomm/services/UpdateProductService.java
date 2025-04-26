@@ -4,5 +4,5 @@ import cpts451.ecomm.entities.Product;
 
 public interface UpdateProductService {
 
-    public void UpdateProduct(Product product);
+    public void UpdateProduct(Product product, String productName, String productDescription, double productPrice, int productQuantity);
 }
