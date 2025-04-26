@@ -16,8 +16,12 @@ public class UpdateProductServiceImpl implements UpdateProductService {
     }
 
     @Override
-    public void UpdateProduct(Product product)
+    public void UpdateProduct(Product product, String productName, String productDescription, double productPrice, int productQuantity)
     {
+        product.setProductName(productName);
+        product.setProductDescription(productDescription);
+        product.setProductPrice(productPrice);
+        product.setProductQuantity(productQuantity);
         ValidateNullFields(product);
 
         productRepository.save(product);

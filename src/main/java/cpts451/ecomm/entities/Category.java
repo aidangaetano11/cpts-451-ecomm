@@ -2,6 +2,9 @@ package cpts451.ecomm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Category {
     @Id
@@ -10,6 +13,9 @@ public class Category {
 
     @Column(nullable = false, unique = true)
     private String categoryName;
+
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Product> products = new ArrayList<>();
 
     public Category(String categoryName) {
         this.categoryName = categoryName;

@@ -42,4 +42,8 @@ public class ReviewProductServiceImpl implements ReviewProductService {
     @Override
     public void deleteById(Integer reviewProductID) { reviewProductRepository.deleteById(reviewProductID); }
 
+    @Override
+    public void deleteByProductId(Integer productID) {
+        reviewProductRepository.deleteByProductId(productID);
+    }
 }

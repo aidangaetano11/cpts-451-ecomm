@@ -36,7 +36,7 @@ public class InitialSetup implements CommandLineRunner {
         Category foodCategory = categoryRepository.save(new Category("Food"));
         System.out.println("Category account created successfully!");
 
-        Product prod = productRepository.save(new Product("Apple", "A red delicious fruit.", 1.50, 23, foodCategory));
+        Product prod = productRepository.save(new Product("Apple", "A red delicious fruit.", 1.37, 23, foodCategory, 12));
         System.out.println("Product created successfully!");
 
         productRepository.save(new Product("Whole Wheat Bread", "A loaf of bread created with whole wheat.", 3.25, 12, foodCategory));

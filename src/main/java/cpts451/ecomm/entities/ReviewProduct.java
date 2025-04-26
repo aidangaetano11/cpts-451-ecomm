@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 public class ReviewProduct extends Review {
 
     @ManyToOne
-    @JoinColumn(name = "product_id")  // Foreign key for product
+    @JoinColumn(name = "product")  // Foreign key for product
     private Product product;
 
     public ReviewProduct (Customer cust, Integer rate, String com, String dat, Product prod) {

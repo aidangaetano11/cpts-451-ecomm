@@ -31,9 +31,11 @@ public class UpdateProductController {
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(@ModelAttribute Product product, Model model) {
+    public String updateProduct(@ModelAttribute Product product, @RequestParam("productName") String productName, @RequestParam("productDescription") String productDescription,
+                                @RequestParam("productPrice") double productPrice, @RequestParam("productQuantity") int productQuantity, Model model) {
         try {
-            updateProductService.UpdateProduct(product);
+            Product newProduct = productService.find(product.getProductID());
+            updateProductService.UpdateProduct(newProduct, productName, productDescription, productPrice, productQuantity);
             return "redirect:/adminHome";
         } catch (MissingFieldException e) {
             model.addAttribute("error", e.getMessage());

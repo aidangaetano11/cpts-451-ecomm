@@ -2,6 +2,7 @@ package cpts451.ecomm.services;
 
 import cpts451.ecomm.entities.Product;
 import cpts451.ecomm.repositories.ProductRepository;
+import cpts451.ecomm.repositories.ReviewProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ReviewProductRepository reviewProductRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ReviewProductRepository reviewProductRepository) {
         this.productRepository = productRepository;
+        this.reviewProductRepository = reviewProductRepository;
     }
 
     /**
@@ -42,6 +45,9 @@ public class ProductServiceImpl implements ProductService {
      * @param productID id of product to delete.
      */
     @Override
-    public void deleteById(Integer productID) { productRepository.deleteById(productID); }
+    public void deleteById(Integer productID) {
+        reviewProductRepository.deleteByProductId(productID);
+        productRepository.deleteByProductId(productID);
+    }
 
 }
