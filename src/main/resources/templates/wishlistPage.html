@@ -114,12 +114,17 @@
                 <td>
                     <form th:action="@{'/wishlist/remove/' + ${item.getProduct().getProductID()}}" method="post">
                         <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                    <form th:action="@{/cart/addToCart}" method="post">
+                        <input type="hidden" name="productId" th:value="${item.getProduct().getProductID()}">
+                        <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
                         <select name="quantity" class="quantity-selector">
                             <option th:each="i : ${#numbers.sequence(1, item.getProduct().getProductQuantity())}"
                                     th:value="${i}"
                                     th:text="${i}">
                             </option>
                         </select>
+                        <button type="submit">Add to Cart</button>
                     </form>
                 </td>
             </tr>
