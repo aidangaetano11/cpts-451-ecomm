@@ -5,7 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+
+<span th:if="${delete == true}">
+<h1 th:text="'Update Review for ' + ${reviewProduct.product.productName}"></h1>
+</span>
+
+<span th:if="${delete == false}">
 <h1 th:text="'Create New Review for ' + ${reviewProduct.product.productName}"></h1>
+</span>
 
 <div id="flash" th:if="${error}" style="color: red">
     <p th:text="${error}"></p>
@@ -39,6 +46,15 @@
     </p>
     <p><input type="submit" value="Leave Review" /></p>
 </form>
+
+<span th:if="${delete == true}">
+    <form action="" th:action="@{/deleteReviewProduct}" method="post">
+        <input th:name="customerId" th:value="${customerId}" type="hidden"/>
+        <input th:name="productId" th:value="${productId}" type="hidden"/>
+
+        <p><input type="submit" value="Delete Review" /></p>
+    </form>
+</span>
 
 <p>
     <a href="/storePage">Return to Store</a>

@@ -187,7 +187,7 @@
                 <form th:action="@{/createReviewProductPage}" method="post">
                     <input type="hidden" name="productId" th:value="${product.getProductID()}">
                     <input type="hidden" name="customerId" th:value="${session.customer.getId()}">
-                    <button type="submit">Leave Review</button>
+                    <button type="submit">Review</button>
                 </form>
             </div>
             <div th:unless="${session.customer != null}">

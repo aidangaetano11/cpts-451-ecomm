@@ -46,4 +46,11 @@ public class ReviewProductServiceImpl implements ReviewProductService {
     public void deleteByProductId(Integer productID) {
         reviewProductRepository.deleteByProductId(productID);
     }
+
+    @Override
+    public void deleteByCustomerProductId(Integer customerId, Integer productID) { reviewProductRepository.deleteByCustomerProductId(customerId, productID); }
+
+    @Override
+    public ReviewProduct findByCustomerProductId(Integer customerId, Integer productId) { return reviewProductRepository.findByCustomerProduct(customerId, productId); }
+
 }
