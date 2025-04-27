@@ -57,9 +57,10 @@ public class CheckoutController {
             CustomerOrder order = new CustomerOrder(customer);
             List<CartItem> cartItems = cartService.getOrCreateCart(customer).getCartItems();
             for (CartItem cartItem : cartItems) {
-                OrderItem orderItem = new OrderItem(cartItem.getProduct(), order, cartItem.getQuantity());
+                Product p = cartItem.getProduct();
+                OrderItem orderItem = new OrderItem(p, order, cartItem.getQuantity());
                 order.addOrderItem(orderItem);
-
+                p.setProductQuantity(p.getProductQuantity() - cartItem.getQuantity());
             }
             orderService.addOrder(order);
             cartService.emptyCart(customerService.find(userId));
