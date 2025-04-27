@@ -14,4 +14,5 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Modifying
     @Query("delete from Product t where t.productID = :productID")
     void deleteByProductId(Integer productID);
+
 }
