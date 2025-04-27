@@ -13,13 +13,15 @@ public class InitialSetup implements CommandLineRunner {
     private final ProductRepository productRepository;
     private final ReviewProductRepository reviewProductRepository;
     private final CategoryRepository categoryRepository;
+    private final OrderRepository orderRepository;
 
-    public InitialSetup(AdminRepository adminRepository, CustomerRepository customerRepository, ProductRepository productRepository, ReviewProductRepository reviewProductRepository, CategoryRepository categoryRepository) {
+    public InitialSetup(AdminRepository adminRepository, CustomerRepository customerRepository, ProductRepository productRepository, ReviewProductRepository reviewProductRepository, CategoryRepository categoryRepository, OrderRepository orderRepository) {
         this.adminRepository = adminRepository;
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
         this.reviewProductRepository = reviewProductRepository;
         this.categoryRepository = categoryRepository;
+        this.orderRepository = orderRepository;
     }
 
     @Override
@@ -39,14 +41,29 @@ public class InitialSetup implements CommandLineRunner {
         Product prod = productRepository.save(new Product("Apple", "A red delicious fruit.", 1.37, 23, foodCategory, 12));
         System.out.println("Product created successfully!");
 
-        productRepository.save(new Product("Whole Wheat Bread", "A loaf of bread created with whole wheat.", 3.25, 12, foodCategory));
+        Product p1 = new Product("Whole Wheat Bread", "A loaf of bread created with whole wheat.", 3.25, 12, foodCategory);
+        productRepository.save(p1);
         System.out.println("Product created successfully!");
 
-        productRepository.save(new Product("Cookies", "A dozen chocolate chip cookies.", 5.50, 12, foodCategory));
+        Product p2 = new Product("Cookies", "A dozen chocolate chip cookies.", 5.50, 12, foodCategory);
+        productRepository.save(p2);
         System.out.println("Product created successfully!");
 
         reviewProductRepository.save(new ReviewProduct(cust, 5, "It's good!", "2025-04-04", prod));
         System.out.println("ReviewProduct created successfully!");
 
+        CustomerOrder order = new CustomerOrder(cust);
+        OrderItem item = new OrderItem(p1, order, 5);
+        order.addOrderItem(item);
+        OrderItem item2 = new OrderItem(p2, order, 3);
+        order.addOrderItem(item2);
+        orderRepository.save(order);
+        System.out.println("Order created successfully!");
+
+        CustomerOrder order2 = new CustomerOrder(cust);
+        OrderItem item3 = new OrderItem(p1, order2, 1);
+        order2.addOrderItem(item3);
+        orderRepository.save(order2);
+        System.out.println("Order created successfully!");
     }
 }

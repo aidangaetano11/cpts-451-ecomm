@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Orders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .order-container {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .order-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    .product-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .login-link {
+      padding: 5px 10px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .account-link {
+      padding: 5px 10px;
+      background: #2dcbbf;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .cart-link {
+      padding: 5px 10px;
+      background: #dabb26;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .wishlist-link {
+      padding: 5px 10px;
+      background: #da8026;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .customerOrder-link {
+      padding: 5px 10px;
+      background: #da8026;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .logout-link {
+      padding: 5px 10px;
+      background: #f44336;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>Welcome to Ecomm 451 Orders Page</h1>
+
+  <div class="user-info">
+    <!-- Show user greeting if logged in -->
+    <span th:if="${session.customer != null}">
+            <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
+            <a href="/customerHome" class="account-link">Account</a>
+            <a href="/cart" class="cart-link">Cart</a>
+            <a href="/wishlist" class="wishlist-link">Wishlist</a>
+            <a href="/orders" class="customerOrder-link">Orders</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+    <span th:if="${session.admin != null}">
+            <span th:text="'Hello, Admin ' + ${session.admin.getFirstName()}"></span>
+            <a href="/adminHome" class="account-link">Account</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+
+    <!-- Show login link if not logged in -->
+    <a th:unless="${session.customer != null or session.admin != null}"
+       href="/loginPage" class="login-link">Login</a>
+  </div>
+</div>
+
+<h3>Orders:</h3>
+
+
+<div th:each="order: ${orders}" class="order-container">
+  <div class="order-details">
+    <div>
+      <h3>Order: </h3>
+      <div th:each="orderItem: ${order.getOrderItems()}" class="order-item-container">
+        <div class="product-details">
+          <div>
+            <h3 th:text="${orderItem.getProduct().getProductName()}"></h3>
+            <p><strong>Category: </strong> <span th:text="${orderItem.getProduct().getProductCategory().categoryName}"></span></p>
+            <p><strong>Description: </strong> <span th:text="${orderItem.getProduct().getProductDescription()}"></span></p>
+            <p><strong>Rating: </strong> <span th:text="${orderItem.getProduct().getAverageRating()}"></span></p>
+            <p><strong>Price: </strong> <span th:text="'$' + ${orderItem.getProduct().getProductPrice()}"></span></p>
+            <p><strong>Amount Bought: </strong> <span th:text="${orderItem.getQuantitySold()}"></span></p>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
