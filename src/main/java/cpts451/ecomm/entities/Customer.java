@@ -13,18 +13,23 @@ import java.util.Set;
 
 @Entity
 public class Customer extends User {
-    private String shippingAddress;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address shippingAddress;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
-    public Customer(String firstName, String lastName, String email, String phoneNumber, String password, String shippingAddress) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Customer(String firstName, String lastName, String email, String phoneNumber, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
-        this.shippingAddress = shippingAddress;
     }
 
     public Customer() {
     }
+
+    public Address getShippingAddress() {return shippingAddress;}
+
+    public void setShippingAddress(Address shippingAddress) {this.shippingAddress = shippingAddress; }
 
     public List<ReviewProduct> getReviewProduct() { return reviewProduct; }
 

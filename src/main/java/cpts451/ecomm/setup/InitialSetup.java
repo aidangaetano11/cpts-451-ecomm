@@ -30,7 +30,7 @@ public class InitialSetup implements CommandLineRunner {
         adminRepository.save(new Admin("Admin", "User", "aidan.gaetano@wsu.edu", "999999999", "password"));
         System.out.println("Admin account created successfully!");
 
-        Customer cust = customerRepository.save(new Customer("Aidan", "Gaetano", "123@gmail.com", "123456788", "password2", "address"));
+        Customer cust = customerRepository.save(new Customer("Aidan", "Gaetano", "123@gmail.com", "123456788", "password2"));
         System.out.println("Customer account created successfully!");
 
         Category foodCategory = categoryRepository.save(new Category("Food"));

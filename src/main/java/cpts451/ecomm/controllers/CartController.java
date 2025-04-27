@@ -34,6 +34,7 @@ public class CartController {
         double tax = subTotal * 0.10;
         double total = subTotal + tax;
 
+        model.addAttribute("customer", customer);
         model.addAttribute("cart", cart);
         model.addAttribute("cartSubTotal", subTotal);
         model.addAttribute("cartTotal", total);

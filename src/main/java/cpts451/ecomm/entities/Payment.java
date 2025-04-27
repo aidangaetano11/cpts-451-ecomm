@@ -1,5 +1,6 @@
 package cpts451.ecomm.entities;
 
+import io.opentelemetry.sdk.metrics.internal.export.CardinalityLimitSelector;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,15 +13,27 @@ public class Payment {
     private Integer userID; // need to implement foreign key still
 
     @Column(nullable = false)
-    private Integer amount;
+    private double amount;
 
     @Column(nullable = false)
-    private String paymentMethod;
+    private String cardNumber;
 
-    public Payment(Integer userID, Integer amount, String paymentMethod) {
+    @Column(nullable = false)
+    private String cardName;
+
+    @Column(nullable = false)
+    private String cardExpirationDate;
+
+    @Column(nullable = false)
+    private String cardSecurityCode;
+
+    public Payment(Integer userID, Integer amount, String cardNumber, String cardName, String cardExpirationDate, String cardSecurityCode) {
         this.userID = userID;
         this.amount = amount;
-        this.paymentMethod = paymentMethod;
+        this.cardName = cardName;
+        this.cardNumber = cardNumber;
+        this.cardExpirationDate = cardExpirationDate;
+        this.cardSecurityCode = cardSecurityCode;
     }
 
     public Payment() {
@@ -43,19 +56,43 @@ public class Payment {
         this.userID = userID;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getCardExpirationDate() {
+        return cardExpirationDate;
+    }
+
+    public void setCardExpirationDate(String cardExpirationDate) {
+        this.cardExpirationDate = cardExpirationDate;
+    }
+
+    public String getCardSecurityCode() {
+        return cardSecurityCode;
+    }
+
+    public void setCardSecurityCode(String cardSecurityCode) {
+        this.cardSecurityCode = cardSecurityCode;
     }
 }

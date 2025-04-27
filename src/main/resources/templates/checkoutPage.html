@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Your Shopping Cart</title>
+    <title>Checkout</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,73 +103,30 @@
     </div>
 </div>
 
-<div class="cart-container">
-    <div th:if="${cart != null and !cart.cartItems.isEmpty()}">
-        <table class="cart-items">
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${cart.cartItems}">
-                <td>
-                    <div class="product-info">
-                        <div>
-                            <div th:text="${item.product.productName}"></div>
-                            <div th:text="${item.product.productDescription}"
-                                 style="font-size: 0.8em; color: #666;"></div>
-                        </div>
-                    </div>
-                </td>
-                <td th:text="'$' + ${#numbers.formatDecimal(item.product.productPrice, 1, 2)}"></td>
-                <td th:text="${item.quantity}"></td>
-                <td th:text="'$' + ${#numbers.formatDecimal(item.product.productPrice * item.quantity, 1, 2)}"></td>
-                <td>
-                    <form th:action="@{'/cart/remove/' + ${item.getProduct().getProductID()}}" method="post">
-                        <button type="submit" class="remove-btn">Remove</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="cart-summary">
-            <!-- Subtotal -->
-            <div class="summary-row">
-                <span>Subtotal:</span>
-                <span th:text="'$' + ${#numbers.formatDecimal(cartSubTotal, 1, 2)}"></span>
-            </div>
-
-            <!-- Tax -->
-            <div class="summary-row">
-                <span>Tax (10%):</span>
-                <span th:text="'$' + ${#numbers.formatDecimal(tax, 1, 2)}"></span>
-            </div>
-
-            <!-- Total -->
-            <div class="summary-row" style="font-weight: bold; font-size: 1.1em;">
-                <span>Total:</span>
-                <span th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}"></span>
-            </div>
-
-            <form th:action="@{/checkoutPage}" method="post">
-                <input type="hidden" name="cartTotal" th:value="${cartTotal}">
-                <button type="submit">Proceed to Checkout</button>
-            </form>
-
-            <!--<a href="/checkoutPage" class="checkout-btn">Proceed to Checkout</a>-->
-        </div>
+<div class="checkout-container">
+    <div class="total-price" style="font-weight: bold; font-size: 1.1em;">
+        <span>Total:</span>
+        <span th:text="'$' + ${#numbers.formatDecimal(cartTotal, 1, 2)}"></span>
     </div>
 
-    <div th:if="${cart == null or cart.cartItems.isEmpty()}" class="empty-cart">
-        <p>Your cart is empty</p>
-        <a href="/storePage" class="continue-shopping">Continue Shopping</a>
-    </div>
+    <form action="" th:action="@{/checkout}" method="post">
+        <p><input th:value="${id}" type="hidden" name="userId"/></p>
+        <p><input th:value="${cartTotal}" type="hidden" name="amount"/></p>
+        <h2>Payment Method</h2>
+        <p>Name on Card: <input th:field="${payment.cardName}" type="text" name="cardName" required="required"/></p>
+        <p>Card Number: <input th:field="${payment.cardNumber}" type="text" name="cardNum" required="required"/></p>
+        <p>Expiration Date: <input th:field="${payment.cardExpirationDate}" type="month" name="expDate" required="required"/></p>
+        <p>CVV Number: <input th:field="${payment.cardSecurityCode}" type="text" name="securityCode" required="required"/></p>
+        <br />
+        <h2>Shipping Address</h2>
+        <p>Street: <input th:field="${address.street}" type="text" name="street" required="required"/></p>
+        <p>City: <input th:field="${address.city}" type="text" name="city" required="required"/></p>
+        <p>State: <input th:field="${address.state}" type="password" name="state"  required="required"/></p>
+        <p>Zip Code: <input th:field="${address.zipCode}" type="text" name="zipCode" required="required"/></p>
+        <p><input type="submit" value="Confirm" /></p>
+    </form>
+
+    <a href="/cart" class="return">Back to Cart</a>
 </div>
 </body>
 </html>
