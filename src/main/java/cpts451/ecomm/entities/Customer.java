@@ -19,6 +19,8 @@ public class Customer extends User {
 
 
     public Customer(String firstName, String lastName, String email, String phoneNumber, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        super(firstName, lastName, email, phoneNumber, "CUSTOMER", password);
+    }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CustomerOrder> orders = new ArrayList<>();
