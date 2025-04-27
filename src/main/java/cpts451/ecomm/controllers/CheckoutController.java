@@ -1,9 +1,6 @@
 package cpts451.ecomm.controllers;
 
-import cpts451.ecomm.entities.CustomerOrder;
-import cpts451.ecomm.entities.Payment;
-import cpts451.ecomm.entities.Customer;
-import cpts451.ecomm.entities.Address;
+import cpts451.ecomm.entities.*;
 import cpts451.ecomm.exceptions.ExistingAttributeException;
 import cpts451.ecomm.exceptions.MissingFieldException;
 import cpts451.ecomm.services.CartService;
@@ -17,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class CheckoutController {
@@ -54,7 +53,15 @@ public class CheckoutController {
     @PostMapping("/checkout")
     public String checkout(@ModelAttribute Payment payment, @ModelAttribute Address address, @RequestParam("userId") Integer userId, @RequestParam("amount") double amount, Model model, HttpSession session) {
         try {
-            CustomerOrder order = new CustomerOrder(customerService.find(userId));
+            Customer customer = customerService.find(userId);
+            CustomerOrder order = new CustomerOrder(customer);
+            List<CartItem> cartItems = cartService.getOrCreateCart(customer).getCartItems();
+            for (CartItem cartItem : cartItems) {
+                OrderItem orderItem = new OrderItem(cartItem.getProduct(), order, cartItem.getQuantity());
+                order.addOrderItem(orderItem);
+
+            }
+            orderService.addOrder(order);
             cartService.emptyCart(customerService.find(userId));
             payment.setAmount(amount);
             payment.setUserID(userId);
