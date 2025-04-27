@@ -34,6 +34,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ReviewProduct> reviewProduct = new ArrayList<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     public Product(String productName, String productDescription, Double productPrice, Integer productQuantity, Category productCategory) {
         this.productName = productName;
         this.productDescription = productDescription;

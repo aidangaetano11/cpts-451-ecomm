@@ -6,17 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Order {
+public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "customer")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
+
+    public CustomerOrder() {}
+
+    public CustomerOrder(Customer customer) {
+        this.customer = customer;
+    }
+
 
     public Customer getCustomer() { return customer; }
 

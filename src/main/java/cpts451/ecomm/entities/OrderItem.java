@@ -10,7 +10,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order;
+    private CustomerOrder customerOrder;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -22,15 +22,15 @@ public class OrderItem {
 
     }
 
-    public OrderItem(Product product, Order order, int quantitySold) {
+    public OrderItem(Product product, CustomerOrder customerOrder, int quantitySold) {
         this.product = product;
         this.quantitySold = quantitySold;
-        this.order = order;
+        this.customerOrder = customerOrder;
     }
 
-    public Order getOrder() { return order; }
+    public CustomerOrder getOrder() { return customerOrder; }
 
-    public void setOrder(Order order) { this.order = order; }
+    public void setOrder(CustomerOrder customerOrder) { this.customerOrder = customerOrder; }
 
 
     public Product getProduct() { return product; }

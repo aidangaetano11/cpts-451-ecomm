@@ -1,9 +1,7 @@
 package cpts451.ecomm.controllers;
 
-import cpts451.ecomm.entities.Order;
+import cpts451.ecomm.entities.CustomerOrder;
 import cpts451.ecomm.entities.Customer;
-import cpts451.ecomm.entities.Product;
-import cpts451.ecomm.entities.OrderItem;
 import cpts451.ecomm.services.OrderService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -28,7 +26,7 @@ public class OrderController {
             return "redirect:/loginPage";
         }
 
-        List<Order> orderList = orderService.getAllOrders(customer);
+        List<CustomerOrder> orderList = orderService.getAllOrders(customer);
 
         model.addAttribute("orders", orderList);
 

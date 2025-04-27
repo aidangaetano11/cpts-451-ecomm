@@ -1,7 +1,7 @@
 package cpts451.ecomm.services;
 
 import cpts451.ecomm.entities.Customer;
-import cpts451.ecomm.entities.Order;
+import cpts451.ecomm.entities.CustomerOrder;
 import cpts451.ecomm.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
-    public List<Order> getAllOrders(Customer customer) {
+    public List<CustomerOrder> getAllOrders(Customer customer) {
         return orderRepository.findByCustomer(customer);
     }
 

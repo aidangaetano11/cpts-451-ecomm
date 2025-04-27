@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Your Orders</title>
@@ -17,52 +17,46 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #eee;
     }
-    .wishlist-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .wishlist-items {
-      width: 100%;
-      table-layout: fixed;
-    }
-    .wishlist-items th, .wishlist-items td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
-    }
-    .cart-items th {
-      background-color: #f2f2f2;
-    }
-    .product-info {
+    .user-info {
       display: flex;
       align-items: center;
+      gap: 15px;
     }
-    .remove-btn {
-      background-color: #f44336;
-      color: white;
-      border: none;
+    .order-container {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .order-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .product-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .login-link {
       padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .empty-wishlist {
-      text-align: center;
-      padding: 40px;
-      font-size: 18px;
-      color: #666;
-    }
-    .continue-shopping {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #2196F3;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-    .logout-link {
-      padding: 5px 10px;
-      background: #f44336;
+      background: #4CAF50;
       color: white;
       text-decoration: none;
       border-radius: 4px;
@@ -74,9 +68,117 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    .cart-link {
+      padding: 5px 10px;
+      background: #dabb26;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .wishlist-link {
+      padding: 5px 10px;
+      background: #da8026;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .customerOrder-link {
+      padding: 5px 10px;
+      background: #da8026;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .logout-link {
+      padding: 5px 10px;
+      background: #f44336;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
+<div class="header">
+  <h1>Welcome to Ecomm 451 Orders Page</h1>
+
+  <div class="user-info">
+    <!-- Show user greeting if logged in -->
+    <span th:if="${session.customer != null}">
+            <span th:text="'Hello, ' + ${session.customer.getFirstName()}"></span>
+            <a href="/customerHome" class="account-link">Account</a>
+            <a href="/cart" class="cart-link">Cart</a>
+            <a href="/wishlist" class="wishlist-link">Wishlist</a>
+            <a href="/orders" class="customerOrder-link">Orders</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+    <span th:if="${session.admin != null}">
+            <span th:text="'Hello, Admin ' + ${session.admin.getFirstName()}"></span>
+            <a href="/adminHome" class="account-link">Account</a>
+            <a href="/logout" class="logout-link">Logout</a>
+        </span>
+
+    <!-- Show login link if not logged in -->
+    <a th:unless="${session.customer != null or session.admin != null}"
+       href="/loginPage" class="login-link">Login</a>
+  </div>
+</div>
+
+<h3>Orders:</h3>
+
+<!-- Sorting Controls -->
+<div class="sort-controls">
+  <form th:action="@{/orderPage}" method="get">
+    <label for="sortBy">Sort by:</label>
+    <select name="sortBy" id="sortBy">
+      <option value="name">Name (A-Z)</option>
+      <option value="nameDesc">Name (Z-A)</option>
+      <option value="category">Category (A-Z)</option>
+      <option value="categoryDesc">Category (Z-A)</option>
+      <option value="rating">Rating (High to Low)</option>
+      <option value="ratingDesc">Rating (Low to High)</option>
+      <option value="price">Price (Low to High)</option>
+      <option value="priceDesc">Price (High to Low)</option>
+      <option value="quantity">Quantity (Low to High)</option>
+      <option value="quantityDesc">Quantity (High to Low)</option>
+    </select>
+    <button type="submit">Apply Sort</button>
+  </form>
+</div>
+
+<div th:each="order: ${orders}" class="order-container">
+  <div class="order-details">
+    <div>
+      <div th:each="orderItem: ${order.getOrderItems()}" class="order-item-container">
+        <div class="product-details">
+          <div>
+            <h3 th:text="${orderItem.getProduct().getProductName()}"></h3>
+            <p><strong>Category: </strong> <span th:text="${orderItem.getProduct().getProductCategory().categoryName}"></span></p>
+            <p><strong>Description: </strong> <span th:text="${orderItem.getProduct().getProductDescription()}"></span></p>
+            <p><strong>Rating: </strong> <span th:text="${orderItem.getProduct().getAverageRating()}"></span></p>
+            <p><strong>Price: </strong> <span th:text="'$' + ${orderItem.getProduct().getProductPrice()}"></span></p>
+            <p><strong>Quantity: </strong> <span th:text="${orderItem.getProduct().getProductQuantity()}"></span></p>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for maintaining sort selection -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the sort parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const sortBy = urlParams.get('sortBy');
+
+    // Set the selected option if sort parameter exists
+    if (sortBy) {
+      const select = document.getElementById('sortBy');
+      select.value = sortBy;
+    }
+  });
+</script>
 
 </body>
 </html>
