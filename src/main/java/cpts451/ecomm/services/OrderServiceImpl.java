@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findByCustomer(customer);
     }
 
+    @Override
+    public void addOrder(CustomerOrder customerOrder) {
+        orderRepository.save(customerOrder);
+    }
+
 }
