@@ -12,4 +12,8 @@ public interface ReviewProductService {
     void deleteById(Integer reviewId);
 
     void deleteByProductId(Integer productID);
+
+    void deleteByCustomerProductId(Integer customerId, Integer productId);
+
+    ReviewProduct findByCustomerProductId(Integer customerId, Integer productId);
 }

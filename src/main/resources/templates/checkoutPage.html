@@ -116,12 +116,12 @@
         <p>Name on Card: <input th:field="${payment.cardName}" type="text" name="cardName" required="required"/></p>
         <p>Card Number: <input th:field="${payment.cardNumber}" type="text" name="cardNum" required="required"/></p>
         <p>Expiration Date: <input th:field="${payment.cardExpirationDate}" type="month" name="expDate" required="required"/></p>
-        <p>CVV Number: <input th:field="${payment.cardSecurityCode}" type="text" name="securityCode" required="required"/></p>
+        <p>CVV Number: <input th:field="${payment.cardSecurityCode}" type="password" name="securityCode" required="required"/></p>
         <br />
         <h2>Shipping Address</h2>
         <p>Street: <input th:field="${address.street}" type="text" name="street" required="required"/></p>
         <p>City: <input th:field="${address.city}" type="text" name="city" required="required"/></p>
-        <p>State: <input th:field="${address.state}" type="password" name="state"  required="required"/></p>
+        <p>State: <input th:field="${address.state}" type="text" name="state"  required="required"/></p>
         <p>Zip Code: <input th:field="${address.zipCode}" type="text" name="zipCode" required="required"/></p>
         <p><input type="submit" value="Confirm" /></p>
     </form>
