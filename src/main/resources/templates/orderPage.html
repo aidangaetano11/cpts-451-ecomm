@@ -31,12 +31,12 @@
     .order-details {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     .product-details {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
     }
     table {
       width: 100%;
@@ -126,29 +126,11 @@
 
 <h3>Orders:</h3>
 
-<!-- Sorting Controls -->
-<div class="sort-controls">
-  <form th:action="@{/orderPage}" method="get">
-    <label for="sortBy">Sort by:</label>
-    <select name="sortBy" id="sortBy">
-      <option value="name">Name (A-Z)</option>
-      <option value="nameDesc">Name (Z-A)</option>
-      <option value="category">Category (A-Z)</option>
-      <option value="categoryDesc">Category (Z-A)</option>
-      <option value="rating">Rating (High to Low)</option>
-      <option value="ratingDesc">Rating (Low to High)</option>
-      <option value="price">Price (Low to High)</option>
-      <option value="priceDesc">Price (High to Low)</option>
-      <option value="quantity">Quantity (Low to High)</option>
-      <option value="quantityDesc">Quantity (High to Low)</option>
-    </select>
-    <button type="submit">Apply Sort</button>
-  </form>
-</div>
 
 <div th:each="order: ${orders}" class="order-container">
   <div class="order-details">
     <div>
+      <h3>Order: </h3>
       <div th:each="orderItem: ${order.getOrderItems()}" class="order-item-container">
         <div class="product-details">
           <div>
@@ -157,7 +139,7 @@
             <p><strong>Description: </strong> <span th:text="${orderItem.getProduct().getProductDescription()}"></span></p>
             <p><strong>Rating: </strong> <span th:text="${orderItem.getProduct().getAverageRating()}"></span></p>
             <p><strong>Price: </strong> <span th:text="'$' + ${orderItem.getProduct().getProductPrice()}"></span></p>
-            <p><strong>Quantity: </strong> <span th:text="${orderItem.getProduct().getProductQuantity()}"></span></p>
+            <p><strong>Amount Bought: </strong> <span th:text="${orderItem.getQuantitySold()}"></span></p>
           </div>
         </div>
         </div>
@@ -165,20 +147,6 @@
   </div>
 </div>
 
-<!-- JavaScript for maintaining sort selection -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get the sort parameter from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const sortBy = urlParams.get('sortBy');
-
-    // Set the selected option if sort parameter exists
-    if (sortBy) {
-      const select = document.getElementById('sortBy');
-      select.value = sortBy;
-    }
-  });
-</script>
 
 </body>
 </html>
