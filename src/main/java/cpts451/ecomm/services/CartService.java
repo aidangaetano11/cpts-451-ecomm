@@ -12,4 +12,6 @@ public interface CartService {
     void removeFromCart(Customer customer, int productId);
 
     double getTotalPrice(Customer customer);
+
+    void emptyCart(Customer customer);
 }

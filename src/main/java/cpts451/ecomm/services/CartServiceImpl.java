@@ -69,6 +69,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void emptyCart(Customer customer) {
+        Cart cart = getOrCreateCart(customer);
+        cart.getCartItems().clear();
+    }
+
+    @Override
     public double getTotalPrice(Customer customer)
     {
         Cart cart = getOrCreateCart(customer);
