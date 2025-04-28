@@ -130,7 +130,7 @@
 <div th:each="order: ${orders}" class="order-container">
   <div class="order-details">
     <div>
-      <h3>Order: </h3>
+      <h3>Order Date: [[${order.getDate()}]] </h3>
       <div th:each="orderItem: ${order.getOrderItems()}" class="order-item-container">
         <div class="product-details">
           <div>
