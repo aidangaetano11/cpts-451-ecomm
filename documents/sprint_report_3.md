@@ -1,5 +1,5 @@
 # Sprint 3 Report
-Video Link: 
+Video Link: https://youtu.be/B5fUTkLCLog
 ## What's New (User Facing)
  * Ability to update/delete a review
  * Wishlist for products
