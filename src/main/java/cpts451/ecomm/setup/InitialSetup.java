@@ -53,7 +53,7 @@ public class InitialSetup implements CommandLineRunner {
         reviewProductRepository.save(new ReviewProduct(cust, 5, "It's good!", "2025-04-04", prod));
         System.out.println("ReviewProduct created successfully!");
 
-        CustomerOrder order = new CustomerOrder(cust);
+        CustomerOrder order = new CustomerOrder(cust, "2025-04-04");
         OrderItem item = new OrderItem(p1, order, 5);
         order.addOrderItem(item);
         OrderItem item2 = new OrderItem(p2, order, 3);
@@ -61,7 +61,7 @@ public class InitialSetup implements CommandLineRunner {
         orderRepository.save(order);
         System.out.println("Order created successfully!");
 
-        CustomerOrder order2 = new CustomerOrder(cust);
+        CustomerOrder order2 = new CustomerOrder(cust, "2025-04-25");
         OrderItem item3 = new OrderItem(p1, order2, 1);
         order2.addOrderItem(item3);
         orderRepository.save(order2);
