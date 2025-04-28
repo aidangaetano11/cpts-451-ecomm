@@ -6,9 +6,11 @@ Video Link:
  * Checkout cart
  * Create a order
  * View list of past orders
+ * Ability to sort and organize the list of products
+ * Added categories to products
 
 ## Work Summary (Developer Facing)
-
+We implemented a new repository for things like address, payment, orders, and wishlist, so those things can be stored inside an appropriate database. Using this, we added a new wishlist page to store products the user may want and later add to cart, and a checkout page to allow the user to order the products they stored in a cart. The checkout page requires the user to input their payment and shipping address which gets stored into their respictive repositories, and once it is confirmed an order is created. The user can check the order to see previous products they purchased. We also added a new store page to sort and organiaze products and reviews, with the ability to update and remove old reviews for products the user previously created.
 
 ## Unfinished Work
 We completed most things we wanted to do, but there were certain features like having individual pages for each product that we did not have enough time to start on.
@@ -90,16 +92,15 @@ Please review the following code files, which were actively developed during thi
  
 ## Retrospective Summary
 Here's what went well:
-  * 
-  * 
-  * 
+  * Coordinated what each person was working on
+  * Communication
+  * Asked questions when needed
  
 Here's what we'd like to improve:
-   * 
-   * 
-   * 
+   * Start working earlier
+   * Organize project better
   
 Here are changes we plan to implement in the next sprint:
-   * 
-   * 
-   * 
+   * Make a detailed plan for what each person should work on earlier
+   * Have a list of issues to be worked on earlier
+   * Have a more detailed descriptions for issues
