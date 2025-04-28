@@ -27,7 +27,7 @@ public class InitialSetup implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        adminRepository.save(new Admin("First", "Last", "admin@example.com", "1234567890", "admin123"));
+        /*adminRepository.save(new Admin("First", "Last", "admin@example.com", "1234567890", "admin123"));
         System.out.println("Admin account created successfully!");
         adminRepository.save(new Admin("Admin", "User", "aidan.gaetano@wsu.edu", "999999999", "password"));
         System.out.println("Admin account created successfully!");
@@ -65,6 +65,6 @@ public class InitialSetup implements CommandLineRunner {
         OrderItem item3 = new OrderItem(p1, order2, 1);
         order2.addOrderItem(item3);
         orderRepository.save(order2);
-        System.out.println("Order created successfully!");
+        System.out.println("Order created successfully!");*/
     }
 }
